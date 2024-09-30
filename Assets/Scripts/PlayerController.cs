@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float deceleration = 10f;
     [SerializeField] private float maxSpeed = 8f;
