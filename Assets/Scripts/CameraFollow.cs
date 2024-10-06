@@ -8,7 +8,6 @@ public class CameraFollow : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private bool isFollowing = true; // Vérifie si elle doit suivre le joueur ou non
 
-    [SerializeField] private bool isTargetting = true; //Si elle doit suivre le joueur
     [SerializeField] private Transform target;
 
     // Bordures personnalisées
