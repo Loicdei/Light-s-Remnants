@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer; // Layer du sol
     [SerializeField] private BoxCollider2D groundCheck; // BoxCollider2D pour la détection du sol
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator animator;
 
     private float xInput;
     private bool isGrounded;
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
         {
             jumpRequest = true;
         }
+
+        //Animation stuff
+        animator.SetFloat("Speed", Mathf.Abs(xInput * acceleration));
 
         Flip();
     }
