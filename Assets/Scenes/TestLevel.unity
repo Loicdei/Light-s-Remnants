@@ -553,13 +553,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1137552135807417657, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: m_OverlapOperation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327510549392610184, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: m_OverlapOperation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.997272
       objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.72
       objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.z
