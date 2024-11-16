@@ -6,7 +6,6 @@ public class BeaconManager : MonoBehaviour
 {
     public static BeaconManager instance;  // Singleton pour un accès global
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la scène
-    private bool allBeaconsLit = false;  // Booléen pour savoir si toutes les balises sont allumées
 
     void Awake()
     {
@@ -35,8 +34,6 @@ public class BeaconManager : MonoBehaviour
                 return;  // Si une balise n'est pas allumée, on quitte
             }
         }
-
-        allBeaconsLit = true;  // Si toutes les balises sont allumées
         Debug.Log("Toutes les balises sont allumées !");
     }
 }
