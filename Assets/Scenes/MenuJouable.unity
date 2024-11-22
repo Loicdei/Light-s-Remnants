@@ -24263,9 +24263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 894583049}
   minX: 0
-  maxX: 100
+  maxX: 1000
   minY: 0
-  maxY: 100
+  maxY: 1000
 --- !u!81 &1604257582
 AudioListener:
   m_ObjectHideFlags: 0
