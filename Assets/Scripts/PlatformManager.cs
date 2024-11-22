@@ -99,28 +99,21 @@ public class PlatformManager : MonoBehaviour
 
         foreach (GameObject beacon in beaconObjects)
         {
-            CircleCollider2D beaconCollider = beacon.GetComponentInChildren<CircleCollider2D>();  // Récupérer le collider de la balise
+            CircleCollider2D beaconCollider = beacon.GetComponentInChildren<CircleCollider2D>(); // Récupérer le collider de la balise
             if (beaconCollider != null)
             {
-                // Récupérer la position du centre du BoxCollider2D de la plateforme
-                Vector2 platformCenter = boxCollider.bounds.center;
-                float platformWidth = boxCollider.bounds.size.x;
-                float platformHeight = boxCollider.bounds.size.y;
-
-                Vector2 beaconPosition = beaconCollider.transform.position;
-                float radius = beaconCollider.radius;
-
-                // Vérifier si la plateforme (le BoxCollider2D) se trouve dans le rayon de la balise
-                if (Vector2.Distance(platformCenter, beaconPosition) < (radius + platformWidth / 2))
+                // Vérifier si le BoxCollider2D de la plateforme et le CircleCollider2D de la balise se superposent
+                if (boxCollider.IsTouching(beaconCollider))
                 {
-                    Debug.Log("under light");
-                    return true;  // La plateforme est sous la lumière
+                    Debug.Log("La plateforme est sous la lumière.");
+                    return true; // La plateforme est sous la lumière
                 }
             }
         }
 
-        return false;  // Aucune balise ne touche la plateforme
+        return false; // Aucune balise ne touche la plateforme
     }
+
 
 
 
