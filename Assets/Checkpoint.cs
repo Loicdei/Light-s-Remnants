@@ -5,6 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private Transform playerSpawn;
+    public bool OneTimeUse;
 
     private void Awake()
     {
@@ -16,7 +17,10 @@ public class Checkpoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerSpawn.position = transform.position;
-            Destroy(gameObject);
+            if (OneTimeUse)
+            {
+                Destroy(gameObject);
+            }  
         }
     }
 }

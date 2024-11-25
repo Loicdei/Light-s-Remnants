@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class DeathZone : MonoBehaviour
+public class Obstacles : MonoBehaviour
 {
     private Transform playerSpawn;
     private Animator fadeSystem;
-    [SerializeField] private CameraFollow cameraFollow;
 
     private void Awake()
     {
@@ -25,9 +24,6 @@ public class DeathZone : MonoBehaviour
     {
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
-        cameraFollow.setSmoothTime(0f);
         collision.transform.position = playerSpawn.position;
-        yield return new WaitForSeconds(1f);
-        cameraFollow.setSmoothTime(0.25f);
     }
 }
