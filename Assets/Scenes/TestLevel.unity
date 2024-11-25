@@ -612,6 +612,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &784766269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5992292133483319795, guid: bdbcaf0ea37c99d449ef043b3aac7c9b, type: 3}
+  m_PrefabInstance: {fileID: 8444926537907437121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &784766273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784766269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9ef964ff0a202419683585a7f139df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 519420033}
 --- !u!1 &991839700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,10 +3207,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacles
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9076692760015544165, guid: bdbcaf0ea37c99d449ef043b3aac7c9b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5992292133483319795, guid: bdbcaf0ea37c99d449ef043b3aac7c9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 784766273}
   m_SourcePrefab: {fileID: 100100000, guid: bdbcaf0ea37c99d449ef043b3aac7c9b, type: 3}
 --- !u!1001 &8779225993187197900
 PrefabInstance:
