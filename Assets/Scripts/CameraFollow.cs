@@ -32,9 +32,4 @@ public class CameraFollow : MonoBehaviour
     {
         isFollowing = following;
     }
-
-    public void setSmoothTime(float newTime)
-    {
-        smoothTime = newTime;
-    }
 }
