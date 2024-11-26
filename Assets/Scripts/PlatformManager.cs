@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -17,6 +18,9 @@ public class PlatformManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
+    private Coroutine fadeCoroutine;
+
+
     private void OnValidate()
     {
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,7 +33,6 @@ public class PlatformManager : MonoBehaviour
     {
         if (spriteRenderer == null || boxCollider == null) return;
 
-        // Définir la texture en fonction de la taille
         switch (size)
         {
             case PlatformSize.Small:
@@ -61,7 +64,6 @@ public class PlatformManager : MonoBehaviour
         switch (platformActivation)
         {
             case PlatformActivation.WithLight:
-                // La plateforme est fonctionnelle uniquement en présence de lumière des balises
                 if (IsUnderLight())
                 {
                     SetPlatformActive();
@@ -74,7 +76,6 @@ public class PlatformManager : MonoBehaviour
 
             case PlatformActivation.WithoutLight:
                 
-                // La plateforme est fonctionnelle si il n'y a pas de lumière des balises
                 if (IsUnderLight())
                 {
                     SetPlatformInactive();
@@ -86,7 +87,6 @@ public class PlatformManager : MonoBehaviour
                 break;
 
             case PlatformActivation.Always:
-                // La plateforme est toujours fonctionnelle
                 SetPlatformActive();
                 break;
         }
@@ -110,22 +110,18 @@ public class PlatformManager : MonoBehaviour
 
     private bool IsUnderLight()
     {
-        // Récupérer tous les objets avec le tag "Beacon"
         GameObject[] beacons = GameObject.FindGameObjectsWithTag("Beacon");
         foreach (GameObject beacon in beacons)
         {
-            // Vérifier si le Beacon a une Light2D
             Light2D light2D = beacon.GetComponent<Light2D>();
             if (light2D != null && light2D.enabled)
             {
-                // Vérifier la portée de la lumière en fonction de son type
                 Vector2 lightPosition = light2D.transform.position;
                 float lightRadius = light2D.pointLightOuterRadius; // Rayon externe de la lumière
 
                 // Vérifier la distance entre la lumière et la plateforme
                 Vector2 platformPosition = transform.position;
 
-                // Calculer les dimensions de la plateforme
                 Vector2 platformSize = boxCollider.size;
                 Vector2 platformMin = (Vector2)transform.position - platformSize / 2;
                 Vector2 platformMax = (Vector2)transform.position + platformSize / 2;
@@ -141,28 +137,44 @@ public class PlatformManager : MonoBehaviour
                 }
                 else if (light2D.lightType == Light2D.LightType.Global)
                 {
-                    // Une lumière globale affecte toujours la plateforme
                     return true;
                 }
-                // Si la lumière est directionnelle ou autre, il faudra ajuster pour tenir compte de son angle et orientation
             }
         }
-        return false; // Aucune lumière des balises ne chevauche la plateforme
+        return false;
     }
-
-
 
     private void SetPlatformActive()
     {
-        // Rendre la plateforme fonctionnelle, visible et avec des collisions
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeSpriteAlpha(1f));
         boxCollider.enabled = true;
-        spriteRenderer.color = Color.white; // Rétablir la couleur originale
     }
 
     private void SetPlatformInactive()
     {
-        // Désactiver la plateforme, la rendre encore plus transparente et sans collisions
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeSpriteAlpha(0.1f));
         boxCollider.enabled = false;
-        spriteRenderer.color = new Color(1, 1, 1, 0.1f); // Rendre la plateforme quasi invisible
     }
+
+    private IEnumerator FadeSpriteAlpha(float targetAlpha)
+    {
+        float currentAlpha = spriteRenderer.color.a;
+        float duration = 0.25f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(currentAlpha, targetAlpha, elapsed / duration); // Interpolation linéaire
+            spriteRenderer.color = new Color(1, 1, 1, newAlpha); // Appliquer le nouvel alpha
+            yield return null; // Attendre la frame suivante
+        }
+
+        // Assurer que l'alpha final est bien celui attendu
+        spriteRenderer.color = new Color(1, 1, 1, targetAlpha);
+        fadeCoroutine = null; // Libérer la référence
+    }
+
 }
