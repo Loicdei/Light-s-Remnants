@@ -91,29 +91,64 @@ public class PlatformManager : MonoBehaviour
                 break;
         }
     }
+    private bool IsCircleOverlappingRectangle(Vector2 circleCenter, float circleRadius, Vector2 rectMin, Vector2 rectMax)
+    {
+        // Trouver le point du rectangle le plus proche du centre du cercle
+        float closestX = Mathf.Clamp(circleCenter.x, rectMin.x, rectMax.x);
+        float closestY = Mathf.Clamp(circleCenter.y, rectMin.y, rectMax.y);
+
+        // Calculer la distance entre ce point et le centre du cercle
+        float distanceX = circleCenter.x - closestX;
+        float distanceY = circleCenter.y - closestY;
+
+        // Si la distance est inférieure au rayon, il y a chevauchement
+        float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+        return distanceSquared < (circleRadius * circleRadius);
+    }
+
+
 
     private bool IsUnderLight()
     {
-        // Chercher toutes les balises avec le tag "Beacon"
-        GameObject[] beaconObjects = GameObject.FindGameObjectsWithTag("Beacon");
-
-        foreach (GameObject beacon in beaconObjects)
+        // Récupérer tous les objets avec le tag "Beacon"
+        GameObject[] beacons = GameObject.FindGameObjectsWithTag("Beacon");
+        foreach (GameObject beacon in beacons)
         {
-            CircleCollider2D beaconCollider = beacon.GetComponentInChildren<CircleCollider2D>(); // Récupérer le collider de la balise
-            if (beaconCollider != null)
+            // Vérifier si le Beacon a une Light2D
+            Light2D light2D = beacon.GetComponent<Light2D>();
+            if (light2D != null && light2D.enabled)
             {
-                // Vérifier si le BoxCollider2D de la plateforme et le CircleCollider2D de la balise se superposent
-                if (boxCollider.IsTouching(beaconCollider))
+                // Vérifier la portée de la lumière en fonction de son type
+                Vector2 lightPosition = light2D.transform.position;
+                float lightRadius = light2D.pointLightOuterRadius; // Rayon externe de la lumière
+
+                // Vérifier la distance entre la lumière et la plateforme
+                Vector2 platformPosition = transform.position;
+
+                // Calculer les dimensions de la plateforme
+                Vector2 platformSize = boxCollider.size;
+                Vector2 platformMin = (Vector2)transform.position - platformSize / 2;
+                Vector2 platformMax = (Vector2)transform.position + platformSize / 2;
+
+                // Si la lumière est de type ponctuel
+                if (light2D.lightType == Light2D.LightType.Point)
                 {
-                    Debug.Log("La plateforme est sous la lumière.");
-                    return true; // La plateforme est sous la lumière
+                    // Vérifier si la lumière affecte la plateforme
+                    if (IsCircleOverlappingRectangle(lightPosition, lightRadius, platformMin, platformMax))
+                    {
+                        return true;
+                    }
                 }
+                else if (light2D.lightType == Light2D.LightType.Global)
+                {
+                    // Une lumière globale affecte toujours la plateforme
+                    return true;
+                }
+                // Si la lumière est directionnelle ou autre, il faudra ajuster pour tenir compte de son angle et orientation
             }
         }
-
-        return false; // Aucune balise ne touche la plateforme
+        return false; // Aucune lumière des balises ne chevauche la plateforme
     }
-
 
 
 
