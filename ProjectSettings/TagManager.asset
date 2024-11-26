@@ -7,8 +7,6 @@ TagManager:
   - PlayerSpawn
   - Light
   - FadeSystem
-  - Lanterne
-  - Item
   layers:
   - Default
   - TransparentFX
@@ -17,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Player
-  - Item
+  - 
+  - 
   - 
   - 
   - 
