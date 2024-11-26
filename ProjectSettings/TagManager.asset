@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Lanterne
   - Item
+  - Beacon
   layers:
   - Default
   - TransparentFX
