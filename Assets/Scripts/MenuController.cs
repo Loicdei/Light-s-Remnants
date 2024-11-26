@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public void ChangeScene(string sceneName) 
+    [SerializeField] SceneAsset scene;
+    public void ChangeScene() 
     { 
-    SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(scene.name);
     }
 
     public void Quit()
