@@ -31,7 +31,7 @@ public class GrabController : MonoBehaviour
         {
             if (hit.CompareTag("Item")) // Vérifie si l'objet a le tag "Item"
             {
-                if (Input.GetKeyDown(KeyCode.E)) // Utiliser E pour saisir
+                if (Input.GetKeyDown(KeyCode.F)) // Utiliser E pour saisir
                 {
                     if (!isHolding)
                     {
