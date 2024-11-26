@@ -178,6 +178,10 @@ MonoBehaviour:
   deceleration: 15
   maxSpeed: 8
   jumpForce: 15
+  variableJumpHeightMultiplier: 0.5
+  coyoteTimeDuration: 0.2
+  jumpBufferTime: 0.1
+  maxFallSpeed: -15
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
