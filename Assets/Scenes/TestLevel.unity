@@ -3254,6 +3254,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: jumpForce
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: coyoteTimeDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4537832860919671365, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3261,6 +3269,22 @@ PrefabInstance:
     - target: {fileID: 4537832860919671365, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2a7a155cce377040a80775a672e85f8, type: 3}
+    - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5673718559494975256, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Layer
@@ -3382,3 +3406,4 @@ SceneRoots:
   - {fileID: 1897794841}
   - {fileID: 620605830}
   - {fileID: 353543179}
+  - {fileID: 206393918}
