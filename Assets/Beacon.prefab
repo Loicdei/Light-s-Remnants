@@ -55,7 +55,7 @@ MonoBehaviour:
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: 100
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: 150
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
@@ -348,6 +348,5 @@ MonoBehaviour:
   beaconOff: {fileID: 21300000, guid: 2acf6bcc83929f04fb1556fcc264e713, type: 3}
   beaconOn: {fileID: 21300000, guid: efe62555ceadc334e8d70e954338efe0, type: 3}
   beaconLight: {fileID: 2327510549392610184}
-  lightCollider: {fileID: 5498986695414016322}
   lightIntensityTarget: 1
   lightRadiusTarget: 30
