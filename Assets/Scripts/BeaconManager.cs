@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BeaconManager : MonoBehaviour
 {
+    [SerializeField] sprite lockSprite;
     public static BeaconManager instance;  // Singleton pour un accès global
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la scène
 
     void Awake()
-        // Crée l'instant pour pouvoir l'appeler
+    // Crée l'instant pour pouvoir l'appeler
     {
         if (instance == null)
         {
@@ -35,6 +36,12 @@ public class BeaconManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("Toutes les balises sont allumées !");
+        // Tous les beacon ont été check, ouverture de la porte
+        OpenDoor();
+    }
+
+    private void OpenDoor()
+    {
+        Debug.Log("ouverture porte");
     }
 }
