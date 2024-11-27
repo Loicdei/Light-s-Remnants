@@ -8,6 +8,7 @@ public class BeaconManager : MonoBehaviour
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la scène
 
     void Awake()
+        // Crée l'instant pour pouvoir l'appeler
     {
         if (instance == null)
         {
@@ -31,7 +32,7 @@ public class BeaconManager : MonoBehaviour
         {
             if (!beacon.IsLit())
             {
-                return;  // Si une balise n'est pas allumée, on quitte
+                return;
             }
         }
         Debug.Log("Toutes les balises sont allumées !");
