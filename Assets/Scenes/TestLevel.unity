@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 985047671802179178, guid: de66257578afdd9489bf44e1614bbbe8, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: FadeSystem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020597110754206443, guid: 25ac24a2e284c85458c9d2e2f7b56bf4, type: 3}
       propertyPath: m_Name
-      value: Checkpoints
+      value: Checkpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2811,7 +2811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020597110754206443, guid: 25ac24a2e284c85458c9d2e2f7b56bf4, type: 3}
       propertyPath: m_Name
-      value: Checkpoints (1)
+      value: Checkpoint 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
