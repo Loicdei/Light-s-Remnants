@@ -11,14 +11,19 @@ public class GrabController : MonoBehaviour
     public float verticalThrowMultiplier = 2.0f;
     public float waitingTime = 0.5f;
 
+    public float enlargedColliderSize = 1.5f;  // Taille du collider agrandie lorsqu'un objet est tenu
+    private Vector2 originalColliderSize;
+
     private GameObject heldItem = null; // Référence à l'objet tenu
     private bool isHolding = false;     // Indique si on tient un objet
-    private Collider2D playerCollider;  // Référence au collider du joueur
+    private BoxCollider2D playerCollider;  // Référence au collider du joueur
     private bool canGrab = true;
+
 
     void Start()
     {
-        playerCollider = GetComponent<Collider2D>(); // Récupérer le collider du joueur
+        playerCollider = GetComponent<BoxCollider2D>(); // Récupérer le collider du joueur
+        originalColliderSize = playerCollider.size;
     }
 
     void Update()
@@ -49,6 +54,26 @@ public class GrabController : MonoBehaviour
         if (isHolding && heldItem != null)
         {
             heldItem.transform.position = itemHolder.position; // Suivre la position du joueur
+            EnlargeCollider();
+        }
+         else
+        {
+            RestoreColliderSize();
+        }
+    }
+
+    void EnlargeCollider()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.size = new Vector2(originalColliderSize.x * enlargedColliderSize, originalColliderSize.y);
+        }
+    }
+    void RestoreColliderSize()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.size = originalColliderSize;
         }
     }
 
@@ -74,9 +99,11 @@ public class GrabController : MonoBehaviour
         // Définis l'objet comme non-parenté au joueur
         heldItem.transform.parent = null;
 
-        // Applique une force pour lancer l'objet
-        Vector2 throwDirection = new Vector2(transform.localScale.x, verticalThrowMultiplier);
-        itemRb.AddForce(throwDirection.normalized * throwForce, ForceMode2D.Impulse);
+        // Détermine la direction de lancement
+        Vector2 throwDirection = new Vector2(transform.localScale.x, verticalThrowMultiplier).normalized;
+
+        // Applique une vélocité fixe pour garantir une trajectoire constante
+        itemRb.velocity = throwDirection * throwForce;
 
         // Réinitialise les références
         heldItem = null;

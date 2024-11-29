@@ -228,7 +228,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &353543177
 BoxCollider2D:
@@ -3737,6 +3737,7 @@ MonoBehaviour:
   throwForce: 10
   verticalThrowMultiplier: 2
   waitingTime: 0.5
+  enlargedColliderSize: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
