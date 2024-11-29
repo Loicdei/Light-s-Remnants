@@ -794,6 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeLock: {fileID: 1730178396}
+  targetScene: {fileID: 102900000, guid: d897196161ae0144398efd72593ba433, type: 3}
 --- !u!95 &1069099107
 Animator:
   serializedVersion: 5
