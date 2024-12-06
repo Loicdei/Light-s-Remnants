@@ -27,61 +27,70 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private float coyoteTimeCounter; // Compteur pour le coyote time
     private float jumpBufferCounter; // Compteur pour le jump buffering
+    private bool canMove = true;
 
     void Update()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
-        isGrounded = groundCheck.IsTouchingLayers(groundLayer);
-        //Coyote time
-        if (isGrounded)
+        if (canMove)
         {
-            coyoteTimeCounter = coyoteTimeDuration;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
 
-        // Jump buffering
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpBufferCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
-        }
-
-        // Animation d'atterrissage
-        if (isGrounded && !wasGrounded)
-        {
-            onLandEvent.Invoke();
-        }
-        wasGrounded = isGrounded;
-
-        // Saut si grounded, coyote time, ou buffered
-        if (jumpBufferCounter > 0 && (isGrounded || coyoteTimeCounter > 0))
-        {
-            jumpRequest = true;
-            isJumping = true;
-            jumpBufferCounter = 0; // reset buffer
-            animator.SetBool("IsJumping", true);
-        }
-
-        // Modifie la hauteur du saut si la touche est relâchée
-        if (Input.GetButtonUp("Jump") && isJumping)
-        {
-            if (rb.velocity.y > 0)
+            xInput = Input.GetAxisRaw("Horizontal");
+            isGrounded = groundCheck.IsTouchingLayers(groundLayer);
+            //Coyote time
+            if (isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+                coyoteTimeCounter = coyoteTimeDuration;
             }
-            isJumping = false;
+            else
+            {
+                coyoteTimeCounter -= Time.deltaTime;
+            }
+
+            // Jump buffering
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpBufferCounter = jumpBufferTime;
+            }
+            else
+            {
+                jumpBufferCounter -= Time.deltaTime;
+            }
+
+            // Animation d'atterrissage
+            if (isGrounded && !wasGrounded)
+            {
+                onLandEvent.Invoke();
+            }
+            wasGrounded = isGrounded;
+
+            // Saut si grounded, coyote time, ou buffered
+            if (jumpBufferCounter > 0 && (isGrounded || coyoteTimeCounter > 0))
+            {
+                jumpRequest = true;
+                isJumping = true;
+                jumpBufferCounter = 0; // reset buffer
+                animator.SetBool("IsJumping", true);
+            }
+
+            // Modifie la hauteur du saut si la touche est relâchée
+            if (Input.GetButtonUp("Jump") && isJumping)
+            {
+                if (rb.velocity.y > 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+                }
+                isJumping = false;
+            }
+
+            // Animation de marche
+            animator.SetFloat("Speed", Mathf.Abs(xInput * acceleration));
+
+            Flip();
         }
-
-        // Animation de marche
-        animator.SetFloat("Speed", Mathf.Abs(xInput * acceleration));
-
-        Flip();
+        else
+        {
+            rb.velocity = Vector2.zero; // Assurez-vous que le joueur est immobile
+        }
     }
 
     // Stop animation on landing
@@ -106,27 +115,39 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Déplacement horizontal avec interpolation pour un mouvement fluide
-        if (xInput != 0)
+        if (canMove)
         {
-            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, xInput * maxSpeed, acceleration * Time.fixedDeltaTime), rb.velocity.y);
+            // Déplacement horizontal avec interpolation pour un mouvement fluide
+            if (xInput != 0)
+            {
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, xInput * maxSpeed, acceleration * Time.fixedDeltaTime), rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, deceleration * Time.fixedDeltaTime), rb.velocity.y);
+            }
+
+            // Applique la force de saut si un saut est demandé
+            if (jumpRequest)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpRequest = false; // Réinitialise la demande de saut après l'avoir effectuée
+            }
+
+            // Limite la vitesse de chute
+            if (rb.velocity.y < maxFallSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+            }
         }
         else
         {
-            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, deceleration * Time.fixedDeltaTime), rb.velocity.y);
+            rb.velocity = Vector2.zero; // Assurez-vous que le joueur est immobile
         }
+    }
 
-        // Applique la force de saut si un saut est demandé
-        if (jumpRequest)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpRequest = false; // Réinitialise la demande de saut après l'avoir effectuée
-        }
-
-        // Limite la vitesse de chute
-        if (rb.velocity.y < maxFallSpeed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
-        }
+    public void setCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }

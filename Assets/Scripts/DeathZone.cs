@@ -6,6 +6,7 @@ public class DeathZone : MonoBehaviour
     private Transform playerSpawn;
     private Animator fadeSystem;
     [SerializeField] private CameraFollow cameraFollow;
+    [SerializeField] private PlayerController playerController;
 
     private void Awake()
     {
@@ -23,11 +24,13 @@ public class DeathZone : MonoBehaviour
 
     private IEnumerator ReplacePlayer(Collider2D collision)
     {
+        playerController.setCanMove(false);
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         cameraFollow.setSmoothTime(0f);
         collision.transform.position = playerSpawn.position;
         yield return new WaitForSeconds(1f);
         cameraFollow.setSmoothTime(0.25f);
+        playerController.setCanMove(true);
     }
 }
