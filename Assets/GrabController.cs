@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GrabController : MonoBehaviour
 {
@@ -19,24 +20,65 @@ public class GrabController : MonoBehaviour
     private BoxCollider2D playerCollider;  // Référence au collider du joueur
     private bool canGrab = true;
 
+    public Camera mainCamera;           // Référence à la caméra principale
+    public Light2D lanternLight;        // Lumière de la lanterne (via Unity 2D Renderer)
+    public float focusZoom;        // Zoom en mode focus (réduit pour un vrai dézoom)
+    public float normalZoom;      // Zoom normal
+    public float zoomSpeed = 0f;
+    private bool isFocusMode = false;   // Indique si le mode focus est activé
+
 
     void Start()
     {
         playerCollider = GetComponent<BoxCollider2D>(); // Récupérer le collider du joueur
         originalColliderSize = playerCollider.size;
+        normalZoom = mainCamera.orthographicSize;
     }
 
     void Update()
     {
-        if (!canGrab) return;
-        // Détecter tous les colliders dans un cercle autour de grabDetect
+        if (!canGrab) return; // Sortir si le joueur ne peut pas saisir
+
+        // Si un objet est tenu
+        if (isHolding && heldItem != null)
+        {
+
+            // Vérifier si l'objet tenu est une lanterne
+            if (heldItem.CompareTag("Lanterne"))
+            {
+
+                // Activer le mode focus avec la touche R
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    ToggleFocusMode(true);
+                }
+
+                // Désactiver automatiquement le mode focus si le joueur bouge
+                if (isFocusMode && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+                {
+                    ToggleFocusMode(false);
+                }
+            }
+
+            // Maintenir l'objet à la position de l'itemHolder
+            heldItem.transform.position = itemHolder.position;
+            EnlargeCollider();
+        }
+        else
+        {
+            RestoreColliderSize(); // Restaurer la taille du collider si aucun objet n'est tenu
+        }
+
+        // Détection des objets attrapables autour du joueur
         Collider2D[] hits = Physics2D.OverlapCircleAll(grabDetect.position, rayDist);
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Item")) // Vérifie si l'objet a le tag "Item"
+            // Vérifier si un objet est soit un "Item" soit une "Lanterne"
+            if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
-                if (Input.GetKeyDown(KeyCode.E)) // Utiliser E pour saisir
+                // Saisir ou lancer l'objet avec la touche E
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (!isHolding)
                     {
@@ -49,17 +91,39 @@ public class GrabController : MonoBehaviour
                 }
             }
         }
+    }
 
-        // Si l'objet est tenu, le faire suivre la position de l'itemHolder
-        if (isHolding && heldItem != null)
+
+
+    void ToggleFocusMode(bool enable)
+    {
+        if (enable)
         {
-            heldItem.transform.position = itemHolder.position; // Suivre la position du joueur
-            EnlargeCollider();
+            StartCoroutine(SmoothZoom(normalZoom+3)); // Démarrer le zoom fluide vers le focusZoom
+            isFocusMode = true;
         }
-         else
+        else
         {
-            RestoreColliderSize();
+            StartCoroutine(SmoothZoom(normalZoom)); // Démarrer le zoom fluide vers le normalZoom
+            isFocusMode = false;
         }
+    }
+
+    // Coroutine pour effectuer un zoom fluide
+    IEnumerator SmoothZoom(float targetZoom)
+    {
+        float startZoom = mainCamera.orthographicSize; // Zoom de départ
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.5f)
+        {
+            mainCamera.orthographicSize = Mathf.Lerp(startZoom, targetZoom, elapsedTime / 0.5f);
+            elapsedTime += Time.deltaTime;
+            yield return null; // Attendre le prochain frame
+        }
+
+        // Assurez-vous que le zoom final est exactement la valeur cible
+        mainCamera.orthographicSize = targetZoom;
     }
 
     void EnlargeCollider()
