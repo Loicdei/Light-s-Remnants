@@ -78,7 +78,7 @@ public class GrabController : MonoBehaviour
             if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
                 // Saisir ou lancer l'objet avec la touche E
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     if (!isHolding)
                     {
