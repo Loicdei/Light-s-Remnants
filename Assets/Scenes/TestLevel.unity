@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 353543176}
   m_Layer: 8
   m_Name: Lanterne
-  m_TagString: Item
+  m_TagString: Lanterne
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3738,6 +3738,11 @@ MonoBehaviour:
   verticalThrowMultiplier: 2
   waitingTime: 0.5
   enlargedColliderSize: 1.5
+  mainCamera: {fileID: 519420031}
+  lanternLight: {fileID: 408534430}
+  focusZoom: 5
+  normalZoom: 10
+  zoomSpeed: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
