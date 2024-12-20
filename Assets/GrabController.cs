@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GrabController : MonoBehaviour
 {
@@ -11,27 +12,73 @@ public class GrabController : MonoBehaviour
     public float verticalThrowMultiplier = 2.0f;
     public float waitingTime = 0.5f;
 
+    public float enlargedColliderSize = 1.5f;  // Taille du collider agrandie lorsqu'un objet est tenu
+    private Vector2 originalColliderSize;
+
     private GameObject heldItem = null; // Référence à l'objet tenu
     private bool isHolding = false;     // Indique si on tient un objet
-    private Collider2D playerCollider;  // Référence au collider du joueur
+    private BoxCollider2D playerCollider;  // Référence au collider du joueur
     private bool canGrab = true;
+
+    public Camera mainCamera;           // Référence à la caméra principale
+    public Light2D lanternLight;        // Lumière de la lanterne (via Unity 2D Renderer)
+    public float focusZoom;        // Zoom en mode focus (réduit pour un vrai dézoom)
+    public float normalZoom;      // Zoom normal
+    public float zoomSpeed = 0f;
+    private bool isFocusMode = false;   // Indique si le mode focus est activé
+
 
     void Start()
     {
-        playerCollider = GetComponent<Collider2D>(); // Récupérer le collider du joueur
+        playerCollider = GetComponent<BoxCollider2D>(); // Récupérer le collider du joueur
+        originalColliderSize = playerCollider.size;
+        normalZoom = mainCamera.orthographicSize;
     }
 
     void Update()
     {
-        if (!canGrab) return;
-        // Détecter tous les colliders dans un cercle autour de grabDetect
+        if (!canGrab) return; // Sortir si le joueur ne peut pas saisir
+
+        // Si un objet est tenu
+        if (isHolding && heldItem != null)
+        {
+
+            // Vérifier si l'objet tenu est une lanterne
+            if (heldItem.CompareTag("Lanterne"))
+            {
+
+                // Activer le mode focus avec la touche R
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    ToggleFocusMode(true);
+                }
+
+                // Désactiver automatiquement le mode focus si le joueur bouge
+                if (isFocusMode && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+                {
+                    ToggleFocusMode(false);
+                }
+            }
+
+            // Maintenir l'objet à la position de l'itemHolder
+            heldItem.transform.position = itemHolder.position;
+            EnlargeCollider();
+        }
+        else
+        {
+            RestoreColliderSize(); // Restaurer la taille du collider si aucun objet n'est tenu
+        }
+
+        // Détection des objets attrapables autour du joueur
         Collider2D[] hits = Physics2D.OverlapCircleAll(grabDetect.position, rayDist);
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Item")) // Vérifie si l'objet a le tag "Item"
+            // Vérifier si un objet est soit un "Item" soit une "Lanterne"
+            if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
-                if (Input.GetKeyDown(KeyCode.E)) // Utiliser E pour saisir
+                // Saisir ou lancer l'objet avec la touche E
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (!isHolding)
                     {
@@ -44,11 +91,53 @@ public class GrabController : MonoBehaviour
                 }
             }
         }
+    }
 
-        // Si l'objet est tenu, le faire suivre la position de l'itemHolder
-        if (isHolding && heldItem != null)
+
+
+    void ToggleFocusMode(bool enable)
+    {
+        if (enable)
         {
-            heldItem.transform.position = itemHolder.position; // Suivre la position du joueur
+            StartCoroutine(SmoothZoom(normalZoom+3)); // Démarrer le zoom fluide vers le focusZoom
+            isFocusMode = true;
+        }
+        else
+        {
+            StartCoroutine(SmoothZoom(normalZoom)); // Démarrer le zoom fluide vers le normalZoom
+            isFocusMode = false;
+        }
+    }
+
+    // Coroutine pour effectuer un zoom fluide
+    IEnumerator SmoothZoom(float targetZoom)
+    {
+        float startZoom = mainCamera.orthographicSize; // Zoom de départ
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.5f)
+        {
+            mainCamera.orthographicSize = Mathf.Lerp(startZoom, targetZoom, elapsedTime / 0.5f);
+            elapsedTime += Time.deltaTime;
+            yield return null; // Attendre le prochain frame
+        }
+
+        // Assurez-vous que le zoom final est exactement la valeur cible
+        mainCamera.orthographicSize = targetZoom;
+    }
+
+    void EnlargeCollider()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.size = new Vector2(originalColliderSize.x * enlargedColliderSize, originalColliderSize.y);
+        }
+    }
+    void RestoreColliderSize()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.size = originalColliderSize;
         }
     }
 
@@ -74,9 +163,11 @@ public class GrabController : MonoBehaviour
         // Définis l'objet comme non-parenté au joueur
         heldItem.transform.parent = null;
 
-        // Applique une force pour lancer l'objet
-        Vector2 throwDirection = new Vector2(transform.localScale.x, verticalThrowMultiplier);
-        itemRb.AddForce(throwDirection.normalized * throwForce, ForceMode2D.Impulse);
+        // Détermine la direction de lancement
+        Vector2 throwDirection = new Vector2(transform.localScale.x, verticalThrowMultiplier).normalized;
+
+        // Applique une vélocité fixe pour garantir une trajectoire constante
+        itemRb.velocity = throwDirection * throwForce;
 
         // Réinitialise les références
         heldItem = null;
