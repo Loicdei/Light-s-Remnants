@@ -11,6 +11,7 @@ public class Beacon : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float lightIntensityTarget = 1.5f;
     public float lightRadiusTarget = 5f;
+    public GrabController grabController;
 
     void Start()
     {
@@ -22,9 +23,12 @@ public class Beacon : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (grabController.isHoldingLantern() == true)
         {
-            ToggleBeacon();
+            if (playerInRange && Input.GetKeyDown(KeyCode.E))
+            {
+                ToggleBeacon();
+            }
         }
 
         // Mise à jour progressive de l'intensité et du rayon si la balise est allumée
@@ -39,6 +43,7 @@ public class Beacon : MonoBehaviour
             beaconLight.intensity = Mathf.Lerp(beaconLight.intensity, 0f, Time.deltaTime);
             beaconLight.pointLightOuterRadius = Mathf.Lerp(beaconLight.pointLightOuterRadius, 0f, Time.deltaTime);
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

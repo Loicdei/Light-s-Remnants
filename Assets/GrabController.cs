@@ -27,6 +27,8 @@ public class GrabController : MonoBehaviour
     public float zoomSpeed = 0f;
     private bool isFocusMode = false;   // Indique si le mode focus est activé
 
+    private bool isHeldItemLantern = false;
+
 
     void Start()
     {
@@ -46,7 +48,6 @@ public class GrabController : MonoBehaviour
             // Vérifier si l'objet tenu est une lanterne
             if (heldItem.CompareTag("Lanterne"))
             {
-
                 // Activer le mode focus avec la touche R
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -78,7 +79,7 @@ public class GrabController : MonoBehaviour
             if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
                 // Saisir ou lancer l'objet avec la touche E
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     if (!isHolding)
                     {
@@ -143,6 +144,10 @@ public class GrabController : MonoBehaviour
 
     void GrabItem(GameObject item)
     {
+        if (item.CompareTag("Lanterne"))
+        {
+            isHeldItemLantern = true;
+        }
         heldItem = item;
         heldItem.transform.parent = itemHolder;
         heldItem.transform.position = itemHolder.position;
@@ -172,6 +177,7 @@ public class GrabController : MonoBehaviour
         // Réinitialise les références
         heldItem = null;
         isHolding = false;
+        isHeldItemLantern = false;
 
         StartCoroutine(WaitBeforeGrab());
     }
@@ -185,6 +191,11 @@ public class GrabController : MonoBehaviour
     {
         Gizmos.color = Color.red; 
         Gizmos.DrawWireSphere(grabDetect.position, rayDist); // hitbox 
+    }
+
+    public bool isHoldingLantern()
+    {
+        return isHeldItemLantern;
     }
     
 }
