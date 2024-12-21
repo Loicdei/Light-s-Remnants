@@ -72,13 +72,13 @@ public class Beacon : MonoBehaviour
         {
             TurnOnBeacon();
         }
+        DoorController.instance.CheckAllBeaconsLit();
     }
 
     private void TurnOnBeacon()
     {
         isLit = true;
         spriteRenderer.sprite = beaconOn;
-        BeaconManager.instance.CheckAllBeaconsLit();
     }
 
     private void TurnOffBeacon()
