@@ -8,30 +8,39 @@ public class Beacon : MonoBehaviour
 
     private bool playerInRange = false;
     private bool isLit = false;
-    private SpriteRenderer spriteRenderer;  
-    public float lightIntensityTarget = 1.5f; 
-    public float lightRadiusTarget = 5f; 
+    private SpriteRenderer spriteRenderer;
+    public float lightIntensityTarget = 1.5f;
+    public float lightRadiusTarget = 5f;
+    public GrabController grabController;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = beaconOff;  
-        beaconLight.intensity = 0f; 
+        spriteRenderer.sprite = beaconOff;
+        beaconLight.intensity = 0f;
         beaconLight.pointLightOuterRadius = 0f;
     }
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isLit)
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && grabController.isHoldingLantern())
         {
-            LightBeacon();
+            ToggleBeacon();
         }
 
+        // Mise à jour progressive de l'intensité et du rayon si la balise est allumée
         if (isLit)
         {
             beaconLight.intensity = Mathf.Lerp(beaconLight.intensity, lightIntensityTarget, Time.deltaTime);
             beaconLight.pointLightOuterRadius = Mathf.Lerp(beaconLight.pointLightOuterRadius, lightRadiusTarget, Time.deltaTime);
         }
+        else
+        {
+            // Réduction progressive de l'intensité et du rayon si la balise est éteinte
+            beaconLight.intensity = Mathf.Lerp(beaconLight.intensity, 0f, Time.deltaTime);
+            beaconLight.pointLightOuterRadius = Mathf.Lerp(beaconLight.pointLightOuterRadius, 0f, Time.deltaTime);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -50,11 +59,29 @@ public class Beacon : MonoBehaviour
         }
     }
 
-    private void LightBeacon()
+    private void ToggleBeacon()
+    {
+        if (isLit)
+        {
+            TurnOffBeacon();
+        }
+        else
+        {
+            TurnOnBeacon();
+        }
+        DoorController.instance.CheckAllBeaconsLit();
+    }
+
+    private void TurnOnBeacon()
     {
         isLit = true;
         spriteRenderer.sprite = beaconOn;
-        BeaconManager.instance.CheckAllBeaconsLit();  // V�rifier si toutes les balises sont allum�es
+    }
+
+    private void TurnOffBeacon()
+    {
+        isLit = false;
+        spriteRenderer.sprite = beaconOff;
     }
 
     public bool IsLit()

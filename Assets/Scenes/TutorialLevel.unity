@@ -9113,7 +9113,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: jumpForce
-      value: 15
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: coyoteTimeDuration
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4537832860919671365, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Name
@@ -9123,6 +9127,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5906925415605092931, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 5923726762506598262, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Interpolate
       value: 1
