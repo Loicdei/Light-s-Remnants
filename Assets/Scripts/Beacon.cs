@@ -23,12 +23,9 @@ public class Beacon : MonoBehaviour
 
     void Update()
     {
-        if (grabController.isHoldingLantern() == true)
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && grabController.isHoldingLantern())
         {
-            if (playerInRange && Input.GetKeyDown(KeyCode.E))
-            {
-                ToggleBeacon();
-            }
+            ToggleBeacon();
         }
 
         // Mise à jour progressive de l'intensité et du rayon si la balise est allumée
