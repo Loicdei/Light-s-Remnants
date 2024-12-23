@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Lanterne
   - Item
+  - Beacon
+  - PlayerSpawn
+  - FadeSystem
   layers:
   - Default
   - TransparentFX
