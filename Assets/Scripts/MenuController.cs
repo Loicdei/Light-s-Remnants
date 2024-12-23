@@ -4,15 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] SceneAsset scene;
+
+    private GameManager manager;
+
+    private void Start()
+    {
+        manager = GameManager.instance;
+    }
+
     public void ChangeScene() 
     { 
-        SceneManager.LoadScene(scene.name);
+        manager.ChangeScene();
     }
 
     public void Quit()
     {
-        Application.Quit();
+        manager.Quit();
     }
 
 }
