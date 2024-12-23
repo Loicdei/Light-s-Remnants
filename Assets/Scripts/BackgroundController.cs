@@ -14,8 +14,7 @@ public class BackgroundConroller : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         float distance = cam.transform.position.x * parallaxEffect; //0 = bouge avec la cam, 1 = reste fixe, 0.5 = moitié de la vitesse de la cam
         float movement = cam.transform.position.x * ( 1 - parallaxEffect );
