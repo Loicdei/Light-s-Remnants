@@ -5600,7 +5600,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: d2a7a155cce377040a80775a672e85f8, type: 3}
     - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5673718559494975256, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_Layer
@@ -5711,6 +5711,12 @@ MonoBehaviour:
   throwForce: 10
   verticalThrowMultiplier: 2
   waitingTime: 0.5
+  enlargedColliderSize: 1.5
+  mainCamera: {fileID: 0}
+  lanternLight: {fileID: 0}
+  focusZoom: 0
+  normalZoom: 0
+  zoomSpeed: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
