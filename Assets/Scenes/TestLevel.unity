@@ -3613,6 +3613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5431143937375417230, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc7603cbc3b7374429c342bff0cd4a8f, type: 3}
     - target: {fileID: 5906925415605092931, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: mainCamera
       value: 
