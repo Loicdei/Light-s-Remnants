@@ -27,9 +27,15 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private float coyoteTimeCounter; // Compteur pour le coyote time
     private float jumpBufferCounter; // Compteur pour le jump buffering
+    private bool isPaused;
 
     void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
+
         xInput = Input.GetAxisRaw("Horizontal");
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
@@ -82,6 +88,11 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(xInput * acceleration));
 
         Flip();
+    }
+
+    public void SetPauseState(bool paused)
+    {
+        isPaused = paused;
     }
 
     // Stop animation on landing

@@ -9,6 +9,7 @@ TagManager:
   - Beacon
   - PlayerSpawn
   - FadeSystem
+  - Obstacle
   layers:
   - Default
   - TransparentFX
