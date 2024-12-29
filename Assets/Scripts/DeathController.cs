@@ -9,6 +9,10 @@ public class DeathController : MonoBehaviour
     CameraFollow cameraFollow;
 
     Rigidbody2D playerRb;
+    private bool isPaused;
+    private PlayerController playerController;
+    private GrabController grabController;
+
     private void Awake()
     {
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
@@ -23,6 +27,8 @@ public class DeathController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
+        grabController = GetComponent<GrabController>();
     }
     void Start()
     {
@@ -38,14 +44,28 @@ public class DeathController : MonoBehaviour
     }
     private IEnumerator Respawn(Collider2D collision)
     {
-        playerRb.velocity = new Vector2(0, 0);
+        isPaused = true;
+
+        if (playerController != null)
+        {
+            playerController.SetPauseState(true);
+            grabController.SetPauseState(true);
+        }
+        //playerRb.velocity = new Vector2(0, 0);
         playerRb.simulated = false;
+        Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
         transform.position = playerSpawn.position;
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
         playerRb.simulated = true;
+        if (playerController != null)
+        {
+            playerController.SetPauseState(false);
+            grabController.SetPauseState(false);
+        }
     }
 }
