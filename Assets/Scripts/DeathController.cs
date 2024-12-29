@@ -9,7 +9,6 @@ public class DeathController : MonoBehaviour
     CameraFollow cameraFollow;
 
     Rigidbody2D playerRb;
-    private bool isPaused;
     private PlayerController playerController;
     private GrabController grabController;
 
@@ -44,14 +43,11 @@ public class DeathController : MonoBehaviour
     }
     private IEnumerator Respawn(Collider2D collision)
     {
-        isPaused = true;
-
         if (playerController != null)
         {
             playerController.SetPauseState(true);
             grabController.SetPauseState(true);
         }
-        //playerRb.velocity = new Vector2(0, 0);
         playerRb.simulated = false;
         Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
