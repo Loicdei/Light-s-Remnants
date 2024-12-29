@@ -7,7 +7,6 @@ public class DeathController : MonoBehaviour
     private Transform playerSpawn;
     private Animator fadeSystem;
     CameraFollow cameraFollow;
-    private SpriteRenderer spriteRenderer;
 
     Rigidbody2D playerRb;
     private void Awake()
@@ -24,7 +23,6 @@ public class DeathController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
@@ -42,12 +40,10 @@ public class DeathController : MonoBehaviour
     {
         playerRb.velocity = new Vector2(0, 0);
         playerRb.simulated = false;
-        spriteRenderer.enabled = false;
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         transform.position = playerSpawn.position;
         cameraFollow.setSmoothTime(0f);
-        spriteRenderer.enabled = true;
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
         playerRb.simulated = true;
