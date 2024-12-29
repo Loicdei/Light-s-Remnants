@@ -161,6 +161,7 @@ public class GrabController : MonoBehaviour
 
     void ThrowItem()
     {
+        ToggleFocusMode(false);
         // Réactive la physique de l'objet
         Rigidbody2D itemRb = heldItem.GetComponent<Rigidbody2D>();
         itemRb.isKinematic = false;
