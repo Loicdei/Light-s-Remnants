@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeathController : MonoBehaviour
@@ -28,10 +27,6 @@ public class DeathController : MonoBehaviour
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         grabController = GetComponent<GrabController>();
-    }
-    void Start()
-    {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
