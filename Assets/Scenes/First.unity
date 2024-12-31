@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 8185518129469670285}
   minX: 0
-  maxX: 100
+  maxX: 24
   minY: 0
   maxY: 100
 --- !u!114 &519420034
@@ -600,6 +600,14 @@ PrefabInstance:
       propertyPath: grabController
       value: 
       objectReference: {fileID: 8185518129469670291}
+    - target: {fileID: 2327510549392610184, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 134.8111
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327510549392610184, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 240.60454
+      objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.65
