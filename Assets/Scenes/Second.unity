@@ -671,7 +671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 8185518129469670285}
   minX: 0
-  maxX: 58
+  maxX: 62
   minY: 0
   maxY: 100
 --- !u!114 &519420034
@@ -726,17 +726,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 598308297680901528, guid: 87f03fa5440a9584d95452ca3f6976e3, type: 3}
+      propertyPath: cameraFollow
+      value: 
+      objectReference: {fileID: 519420033}
     - target: {fileID: 7743093281169285693, guid: 87f03fa5440a9584d95452ca3f6976e3, type: 3}
       propertyPath: m_Name
       value: DeathZone
       objectReference: {fileID: 0}
     - target: {fileID: 9156405445071092313, guid: 87f03fa5440a9584d95452ca3f6976e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.95
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: 9156405445071092313, guid: 87f03fa5440a9584d95452ca3f6976e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.84
+      value: -7.88
       objectReference: {fileID: 0}
     - target: {fileID: 9156405445071092313, guid: 87f03fa5440a9584d95452ca3f6976e3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -858,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791518262178181410, guid: ea322e349f558244cae10e66884e2146, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.52
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 8791518262178181410, guid: ea322e349f558244cae10e66884e2146, type: 3}
       propertyPath: m_LocalPosition.z
@@ -911,7 +915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2848209016306373092, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.24
+      value: 7.18
       objectReference: {fileID: 0}
     - target: {fileID: 2848209016306373092, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11753,7 +11757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8823673724741043041, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -1.37
       objectReference: {fileID: 0}
     - target: {fileID: 8823673724741043041, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.z
