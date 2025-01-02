@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 [ExecuteAlways]
 public class PlatformManager : MonoBehaviour
@@ -15,10 +16,14 @@ public class PlatformManager : MonoBehaviour
 
     private void OnValidate()
     {
+        // Évitez d'exécuter toute logique complexe ici
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (boxCollider == null) boxCollider = GetComponent<BoxCollider2D>();
 
-        ResizePlatform();
+        EditorApplication.delayCall += () =>
+        {
+            if (this != null) ResizePlatform(); // S'assure que la logique est appelée en dehors du pipeline de validation
+        };
     }
 
     private void ResizePlatform()
@@ -46,4 +51,21 @@ public class PlatformManager : MonoBehaviour
         boxCollider.size = new Vector2(width, 0.5f); // 0.5f pour 8px de hauteur
         boxCollider.offset = Vector2.zero; // Le BoxCollider est centré sur le transform
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(PlatformManager))]
+    public class PlatformManagerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            PlatformManager platformManager = (PlatformManager)target;
+            if (GUILayout.Button("Resize Platform"))
+            {
+                platformManager.ResizePlatform();
+            }
+        }
+    }
+#endif
 }
