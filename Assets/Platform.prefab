@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7564613140572438600}
   - component: {fileID: 3253451705531022903}
   - component: {fileID: 1002360500931975333}
+  - component: {fileID: -1209182993771379231}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
@@ -144,7 +145,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 32
-  platformActivation: 0
   smallSprite: {fileID: 21300000, guid: 02713b551f43fe6489e62dcfc5ae9246, type: 3}
   mediumSprite: {fileID: 21300000, guid: bae73192e5f3fc046a63c65da43d1313, type: 3}
   largeSprite: {fileID: 21300000, guid: 4d80e6e0e4f726545a4bce61d6d88ee3, type: 3}
+--- !u!114 &-1209182993771379231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630673660494092604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f669e485e83bb439880ed049ae50ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationType: 0
