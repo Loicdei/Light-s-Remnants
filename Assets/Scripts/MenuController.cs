@@ -1,15 +1,54 @@
 using UnityEngine;
-using UnityEditor;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+public enum PanelType
+{
+    None,
+    Main,
+    Options,
+    Credits,
+}
 
 public class MenuController : MonoBehaviour
 {
+    //Permet d'enregistrer et de faciliter l'ajout de panels depuis Unity (utilisation de List & Dictionary)
+    [Header("Panels")]
+    [SerializeField] private List<MenuPanel> panelsList = new List<MenuPanel>();
+    private Dictionary<PanelType, MenuPanel> panelsDict = new Dictionary<PanelType, MenuPanel>();
+
+    [SerializeField] private EventSystem eventController;
 
     private GameManager manager;
+    private MenuInput inputs;
 
     private void Start()
     {
         manager = GameManager.instance;
+        inputs = GetComponent<MenuInput>();
+
+        //Permet l'ajout de panels dans la liste
+        foreach (var _panel in panelsList)
+        {
+            if (_panel) panelsDict.Add(_panel.GetPanelType(), _panel);
+            _panel.init(this);
+        }
+
+        //Ouvre par défaut le Main panel
+        OpenOnePanel(PanelType.Main);
+    }
+
+    private void OpenOnePanel(PanelType _type)
+    {
+        foreach (var _panel in panelsList) _panel.ChangeState(false);
+
+        if (_type != PanelType.None) panelsDict[_type].ChangeState(true);
+    }
+
+    public void OpenPanel(PanelType _type)
+    {
+        OpenOnePanel(_type);
     }
 
     public void ChangeScene() 
@@ -20,6 +59,14 @@ public class MenuController : MonoBehaviour
     public void Quit()
     {
         manager.Quit();
+    }
+
+    public void SetSelectedObject(GameObject _element, Button _rightPanel, Button _leftPanel)
+    {
+        eventController.SetSelectedGameObject(_element);
+
+        if (_rightPanel != null) inputs.SetShoulderListener(MenuInput.Side.Right, _rightPanel.onClick.Invoke, _rightPanel.Select);
+        if (_leftPanel != null) inputs.SetShoulderListener(MenuInput.Side.Left, _leftPanel.onClick.Invoke, _leftPanel.Select);
     }
 
 }
