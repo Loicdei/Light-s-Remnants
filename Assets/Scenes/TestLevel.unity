@@ -189,7 +189,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 533593254015484827, guid: c410de961620e174ba6b40faf12475a0, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924628333749557533, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+      propertyPath: m_Color.a
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3380996088138331178, guid: c410de961620e174ba6b40faf12475a0, type: 3}
       propertyPath: m_TagString
@@ -246,7 +250,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3380996088138331178, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1868143152}
   m_SourcePrefab: {fileID: 100100000, guid: c410de961620e174ba6b40faf12475a0, type: 3}
 --- !u!1 &353543174
 GameObject:
@@ -3348,6 +3355,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!1 &1868143144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3380996088138331178, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+  m_PrefabInstance: {fileID: 313440036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868143152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868143144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f669e485e83bb439880ed049ae50ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationType: 0
 --- !u!1 &2060113359
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,7 +3504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3253451705531022903, guid: e2b30c6553f92534c896213110de5c12, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253451705531022903, guid: e2b30c6553f92534c896213110de5c12, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -3495,7 +3520,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: bae73192e5f3fc046a63c65da43d1313, type: 3}
     - target: {fileID: 7564613140572438600, guid: e2b30c6553f92534c896213110de5c12, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
