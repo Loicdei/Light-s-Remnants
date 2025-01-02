@@ -106,6 +106,20 @@ public class LightActivation : MonoBehaviour
 
             return Vector2.Distance(lightPosition, circlePosition) < (lightRadius + circleRadius);
         }
+        else if (collider2D is EdgeCollider2D edgeCollider)
+        {
+            Vector2[] points = edgeCollider.points;
+            Vector2 edgePosition = (Vector2)transform.position;
+
+            foreach (var point in points)
+            {
+                Vector2 worldPoint = edgePosition + point;
+                if (Vector2.Distance(lightPosition, worldPoint) < lightRadius)
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
