@@ -30,6 +30,8 @@ public class GrabController : MonoBehaviour
     private bool isHeldItemLantern = false;
     private bool isPaused;
 
+    private SpriteRenderer itemSpriteRenderer; 
+    private int originalSortingOrder;
     void Start()
     {
         playerCollider = GetComponent<BoxCollider2D>(); // Récupérer le collider du joueur
@@ -160,6 +162,10 @@ public class GrabController : MonoBehaviour
         heldItem.transform.position = itemHolder.position;
         heldItem.GetComponent<Rigidbody2D>().isKinematic = true; // Désactiver la physique pendant qu'il est tenu
 
+        itemSpriteRenderer = item.GetComponent<SpriteRenderer>();
+        originalSortingOrder = itemSpriteRenderer.sortingOrder;
+        itemSpriteRenderer.sortingOrder = 1000;
+
         // Désactiver la collision entre le joueur et l'objet tenu
         Physics2D.IgnoreCollision(heldItem.GetComponent<Collider2D>(), playerCollider, true);
 
@@ -186,6 +192,8 @@ public class GrabController : MonoBehaviour
         heldItem = null;
         isHolding = false;
         isHeldItemLantern = false;
+
+        itemSpriteRenderer.sortingOrder = originalSortingOrder;
 
         StartCoroutine(WaitBeforeGrab());
     }
