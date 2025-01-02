@@ -28,7 +28,7 @@ public class GrabController : MonoBehaviour
     private bool isFocusMode = false;   // Indique si le mode focus est activé
 
     private bool isHeldItemLantern = false;
-
+    private bool isPaused;
 
     void Start()
     {
@@ -39,6 +39,10 @@ public class GrabController : MonoBehaviour
 
     void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
         if (!canGrab) return; // Sortir si le joueur ne peut pas saisir
 
         // Si un objet est tenu
@@ -94,7 +98,10 @@ public class GrabController : MonoBehaviour
         }
     }
 
-
+    public void SetPauseState(bool paused)
+    {
+        isPaused = paused;
+    }
 
     void ToggleFocusMode(bool enable)
     {
@@ -161,6 +168,7 @@ public class GrabController : MonoBehaviour
 
     void ThrowItem()
     {
+        ToggleFocusMode(false);
         // Réactive la physique de l'objet
         Rigidbody2D itemRb = heldItem.GetComponent<Rigidbody2D>();
         itemRb.isKinematic = false;
