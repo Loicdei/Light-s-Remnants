@@ -252,6 +252,14 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3355981929717850294, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+      propertyPath: pointA
+      value: 
+      objectReference: {fileID: 313440038}
+    - target: {fileID: 3355981929717850294, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+      propertyPath: pointB
+      value: 
+      objectReference: {fileID: 313440037}
     - target: {fileID: 3380996088138331178, guid: c410de961620e174ba6b40faf12475a0, type: 3}
       propertyPath: m_TagString
       value: Obstacle
@@ -309,6 +317,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+--- !u!4 &313440037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1088586221508929756, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+  m_PrefabInstance: {fileID: 313440036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &313440038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1836079234618631751, guid: c410de961620e174ba6b40faf12475a0, type: 3}
+  m_PrefabInstance: {fileID: 313440036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &353543174
 GameObject:
   m_ObjectHideFlags: 0
