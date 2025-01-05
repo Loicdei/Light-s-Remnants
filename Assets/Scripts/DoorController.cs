@@ -14,6 +14,12 @@ public class DoorController : MonoBehaviour
     private bool playerInRange = false;
     private bool isDoorUnlocked = false;
     private Animator doorAnimator; // Référence à l'Animator de la porte
+    private Animator fadeSystem;
+    [SerializeField] private CameraFollow cameraFollow;
+
+    Rigidbody2D playerRb;
+    private PlayerController playerController;
+    private GrabController grabController;
 
     void Awake()
     {
@@ -29,6 +35,10 @@ public class DoorController : MonoBehaviour
 
         // Assigne l'Animator
         doorAnimator = GetComponent<Animator>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        grabController = GameObject.FindGameObjectWithTag("Player").GetComponent<GrabController>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
 
     private void Update()
@@ -40,7 +50,7 @@ public class DoorController : MonoBehaviour
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
             if (playerInRange && Input.GetAxis("Vertical") > 0)
             {
-                SceneManager.LoadScene(targetScene.name);
+                StartCoroutine(TransitionLevel());
                 // TODO : Unlock next level
                 // TODO : transition
             }
@@ -84,4 +94,33 @@ public class DoorController : MonoBehaviour
             playerInRange = false;
         }
     }
+
+    private bool isTransitioning = false;
+
+    private IEnumerator TransitionLevel()
+    {
+        if (isTransitioning) yield break; // Ne rien faire si une transition est en cours
+        isTransitioning = true;
+
+        if (playerController != null)
+        {
+            playerController.SetPauseState(true);
+            grabController.SetPauseState(true);
+        }
+        playerRb.simulated = false;
+        Time.timeScale = 0;
+        fadeSystem.SetTrigger("FadeIn");
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MenuJouable");
+        yield return new WaitForSecondsRealtime(1f);
+        playerRb.simulated = true;
+        if (playerController != null)
+        {
+            playerController.SetPauseState(false);
+            grabController.SetPauseState(false);
+        }
+    }
+    //fadeSystem.SetTrigger("FadeIn");
+        //yield return new WaitForSecondsRealtime(1f);
 }
