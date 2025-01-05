@@ -48,7 +48,9 @@ public class DeathController : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        transform.position = playerSpawn.position;
+        Vector3 newPlayerSpawn = playerSpawn.position;
+        newPlayerSpawn.y += 1f;
+        transform.position = newPlayerSpawn;
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
