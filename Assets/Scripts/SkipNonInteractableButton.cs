@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//ChatGPT à été utiliser en majorité
+
 public class SkipNonInteractableButton : MonoBehaviour
 {
-    private float navigationCooldown = 0.3f; // Temps minimum entre deux navigations
-    private float lastNavigationTime = 0f;  // Moment de la dernière navigation
-    private float verticalInputThreshold = 0.5f; // Seuil pour détecter une direction verticale
+    private float navigationCooldown = 0.5f; // Temps minimum entre deux navigations (ralenti)
+    private float lastNavigationTime = 0f;   // Moment de la dernière navigation
+    private float verticalInputThreshold = 0.8f; // Seuil pour détecter une direction verticale
 
     void Update()
     {
@@ -20,61 +22,70 @@ public class SkipNonInteractableButton : MonoBehaviour
         bool isUp = Input.GetKeyDown(KeyCode.UpArrow) || verticalInput > verticalInputThreshold;
 
         // Navigation bas
-        if (isDown && Time.time - lastNavigationTime > navigationCooldown)
+        if (isDown && CanNavigate())
         {
             lastNavigationTime = Time.time;
-            NavigateDown();
+            Navigate(Direction.Down);
         }
 
         // Navigation haut
-        if (isUp && Time.time - lastNavigationTime > navigationCooldown)
+        if (isUp && CanNavigate())
         {
             lastNavigationTime = Time.time;
-            NavigateUp();
+            Navigate(Direction.Up);
         }
     }
 
-    private void NavigateDown()
+    private bool CanNavigate()
+    {
+        // Vérifie si suffisamment de temps s'est écoulé depuis la dernière navigation
+        return Time.time - lastNavigationTime > navigationCooldown;
+    }
+
+    private enum Direction
+    {
+        Up,
+        Down
+    }
+
+    private void Navigate(Direction direction)
     {
         GameObject current = EventSystem.current.currentSelectedGameObject;
-        if (current == null) { return; }
+        if (current == null) return;
 
         Selectable currentSelectable = current.GetComponent<Selectable>();
-        if (currentSelectable == null) { return; }
+        if (currentSelectable == null) return;
 
-        // Trouver le prochain élément interactif en bas
-        Selectable nextSelectable = currentSelectable.FindSelectableOnDown();
-        while (nextSelectable != null && !nextSelectable.interactable)
+        Transform parentPanel = current.transform.parent;
+        Selectable nextSelectable = null;
+        HashSet<Selectable> visited = new HashSet<Selectable>();
+
+        // Navigation verticale
+        if (direction == Direction.Down)
+            nextSelectable = currentSelectable.FindSelectableOnDown();
+        else if (direction == Direction.Up)
+            nextSelectable = currentSelectable.FindSelectableOnUp();
+
+        while (nextSelectable != null && (!nextSelectable.interactable || nextSelectable.transform.parent != parentPanel))
         {
-            nextSelectable = nextSelectable.FindSelectableOnDown();
+            if (visited.Contains(nextSelectable)) break; // Empêche les boucles infinies
+            visited.Add(nextSelectable);
+
+            nextSelectable = direction == Direction.Down
+                ? nextSelectable.FindSelectableOnDown()
+                : nextSelectable.FindSelectableOnUp();
         }
 
-        // Sélectionner l'élément trouvé
-        if (nextSelectable != null)
+        if (nextSelectable != null && nextSelectable.transform.parent == parentPanel)
         {
-            EventSystem.current.SetSelectedGameObject(nextSelectable.gameObject);
+            StartCoroutine(SelectButtonWithDelay(nextSelectable));
         }
     }
 
-    private void NavigateUp()
+    private IEnumerator SelectButtonWithDelay(Selectable button)
     {
-        GameObject current = EventSystem.current.currentSelectedGameObject;
-        if (current == null) { return; }
-
-        Selectable currentSelectable = current.GetComponent<Selectable>();
-        if (currentSelectable == null) { return; }
-
-        // Trouver le prochain élément interactif en haut
-        Selectable previousSelectable = currentSelectable.FindSelectableOnUp();
-        while (previousSelectable != null && !previousSelectable.interactable)
-        {
-            previousSelectable = previousSelectable.FindSelectableOnUp();
-        }
-
-        // Sélectionner l'élément trouvé
-        if (previousSelectable != null)
-        {
-            EventSystem.current.SetSelectedGameObject(previousSelectable.gameObject);
-        }
+        yield return new WaitForSeconds(0.1f); // Attendez un court délai avant de changer la sélection
+        EventSystem.current.SetSelectedGameObject(null); // Réinitialiser la sélection
+        EventSystem.current.SetSelectedGameObject(button.gameObject); // Sélectionner le bouton trouvé
     }
 }
