@@ -17,7 +17,6 @@ public class MenuPanel : MonoBehaviour
 
     private MenuController controller;
 
-
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
