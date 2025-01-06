@@ -1770,6 +1770,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 2868658311227323287, guid: cf7918e1c6de5ea46950dcb1234c2f8c, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420028}
     - target: {fileID: 9193051345079616695, guid: cf7918e1c6de5ea46950dcb1234c2f8c, type: 3}
       propertyPath: m_Name
       value: Background
