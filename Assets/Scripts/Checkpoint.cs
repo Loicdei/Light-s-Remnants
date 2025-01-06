@@ -13,7 +13,6 @@ public class Checkpoint : MonoBehaviour
     {
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         spawnPoint = transform.GetChild(0).position;
-        Debug.Log(spawnPoint);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
