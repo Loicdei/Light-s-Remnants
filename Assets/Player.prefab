@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5906925415605092931}
   - component: {fileID: 6052333454571843748}
   - component: {fileID: 5902266266705700694}
+  - component: {fileID: 3944801390339356511}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -282,28 +283,28 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.26111206, y: 0.47993863}
-      - {x: 0.095712736, y: 0.5729064}
-      - {x: -0.16460711, y: 0.5739095}
-      - {x: -0.4062398, y: 0.3327516}
-      - {x: -0.40682602, y: 0.117093444}
-      - {x: -0.3585863, y: -0.30882967}
-      - {x: -0.35788822, y: -0.45259845}
+    - - {x: 0.2039021, y: 0.42766798}
+      - {x: -0.14269763, y: 0.4273924}
+      - {x: -0.19424677, y: -0.046080828}
+      - {x: -0.26064777, y: -0.1631058}
       - {x: -0.26243526, y: -0.68971026}
-      - {x: -0.14438051, y: -0.7864825}
       - {x: -0.1437657, y: -0.9512134}
       - {x: 0.18963285, y: -0.95238096}
-      - {x: 0.18972492, y: -0.78616273}
-      - {x: 0.21705306, y: -0.71240926}
-      - {x: 0.28609467, y: -0.45271242}
-      - {x: 0.35920382, y: -0.4301443}
-      - {x: 0.47569323, y: -0.38014424}
-      - {x: 0.47586584, y: -0.2870196}
-      - {x: 0.3582692, y: -0.28423095}
-      - {x: 0.28327954, y: -0.21293038}
-      - {x: 0.28602993, y: 0.38132387}
+      - {x: 0.26330197, y: 0.38132387}
   m_UseDelaunayMesh: 0
 --- !u!114 &5902266266705700694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4537832860919671365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d20c9b90f9dfc141b0d7a26eda2b9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3944801390339356511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
