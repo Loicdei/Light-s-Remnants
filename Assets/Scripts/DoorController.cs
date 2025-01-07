@@ -9,15 +9,21 @@ public class DoorController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer closeLock;
     [SerializeField] private SceneAsset targetScene;
-    public static DoorController instance;  // Singleton pour un accès global
-    private Beacon[] beacons;  // Tableau contenant toutes les balises dans la scène
+    public static DoorController instance;  // Singleton pour un accï¿½s global
+    private Beacon[] beacons;  // Tableau contenant toutes les balises dans la scï¿½ne
     private bool playerInRange = false;
     private bool isDoorUnlocked = false;
-    private Animator doorAnimator; // Référence à l'Animator de la porte
+    private Animator doorAnimator; // Rï¿½fï¿½rence ï¿½ l'Animator de la porte
+    private Animator fadeSystem;
+    [SerializeField] private CameraFollow cameraFollow;
+
+    Rigidbody2D playerRb;
+    private PlayerController playerController;
+    private GrabController grabController;
 
     void Awake()
     {
-        // Crée l'instance pour pouvoir l'appeler
+        // Crï¿½e l'instance pour pouvoir l'appeler
         if (instance == null)
         {
             instance = this;
@@ -29,6 +35,10 @@ public class DoorController : MonoBehaviour
 
         // Assigne l'Animator
         doorAnimator = GetComponent<Animator>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        grabController = GameObject.FindGameObjectWithTag("Player").GetComponent<GrabController>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
 
     private void Update()
@@ -40,19 +50,18 @@ public class DoorController : MonoBehaviour
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
             if (playerInRange && Input.GetAxis("Vertical") > 0)
             {
-                SceneManager.LoadScene(targetScene.name);
+                StartCoroutine(TransitionLevel());
                 // TODO : Unlock next level
-                // TODO : transition
             }
         }
     }
 
     void Start()
     {
-        beacons = FindObjectsOfType<Beacon>();  // Trouver toutes les balises dans la scène
+        beacons = FindObjectsOfType<Beacon>();  // Trouver toutes les balises dans la scï¿½ne
     }
 
-    // Fonction pour vérifier si toutes les balises sont allumées
+    // Fonction pour vï¿½rifier si toutes les balises sont allumï¿½es
     public void CheckAllBeaconsLit()
     {
         foreach (Beacon beacon in beacons)
@@ -64,7 +73,7 @@ public class DoorController : MonoBehaviour
                 return;
             }
         }
-        // Tous les beacon ont été check, unlock la porte
+        // Tous les beacon ont ï¿½tï¿½ check, unlock la porte
         isDoorUnlocked = true;
         closeLock.enabled = false;
     }
@@ -84,4 +93,33 @@ public class DoorController : MonoBehaviour
             playerInRange = false;
         }
     }
+
+    private bool isTransitioning = false;
+
+    private IEnumerator TransitionLevel()
+    {
+        if (isTransitioning) yield break; // Ne rien faire si une transition est en cours
+        isTransitioning = true;
+
+        if (playerController != null)
+        {
+            playerController.SetPauseState(true);
+            grabController.SetPauseState(true);
+        }
+        playerRb.simulated = false;
+        Time.timeScale = 0;
+        fadeSystem.SetTrigger("FadeIn");
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MenuJouable");
+        yield return new WaitForSecondsRealtime(1f);
+        playerRb.simulated = true;
+        if (playerController != null)
+        {
+            playerController.SetPauseState(false);
+            grabController.SetPauseState(false);
+        }
+    }
+    //fadeSystem.SetTrigger("FadeIn");
+    //yield return new WaitForSecondsRealtime(1f);
 }
