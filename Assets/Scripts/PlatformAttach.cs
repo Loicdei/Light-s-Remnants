@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class PlatformAttach : MonoBehaviour
 {
+    private Vector3 lastPlatformPosition;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && IsPlayerAbove(collision))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(transform);
+            lastPlatformPosition = transform.position;
         }
     }
 
@@ -14,10 +16,9 @@ public class PlatformAttach : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!IsPlayerAbove(collision))
-            {
-                collision.transform.SetParent(null);
-            }
+            Vector3 deltaPosition = transform.position - lastPlatformPosition;
+            collision.transform.position += new Vector3(deltaPosition.x, 0, 0);  // Applique seulement le mouvement sur X
+            lastPlatformPosition = transform.position;
         }
     }
 
@@ -25,21 +26,7 @@ public class PlatformAttach : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(null);
+            lastPlatformPosition = Vector3.zero;
         }
-    }
-
-    private bool IsPlayerAbove(Collision2D collision)
-    {
-        // Récupère la position du joueur et de la plateforme
-        Vector3 playerPosition = collision.transform.position;
-        Vector3 platformPosition = transform.position;
-
-        // Vérifie si le joueur est légèrement au-dessus de la plateforme
-        // Ajuste les marges selon la hauteur de ton collider
-        float playerBottom = playerPosition.y - collision.collider.bounds.extents.y;
-        float platformTop = platformPosition.y + GetComponent<Collider2D>().bounds.extents.y;
-
-        return playerBottom >= platformTop;
     }
 }
