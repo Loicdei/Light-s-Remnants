@@ -5,7 +5,7 @@ public class DeathController : MonoBehaviour
 {
     private Transform playerSpawn;
     private Animator fadeSystem;
-    public CameraFollow cameraFollow;
+    private CameraFollow cameraFollow;
 
     Rigidbody2D playerRb;
     private PlayerController playerController;

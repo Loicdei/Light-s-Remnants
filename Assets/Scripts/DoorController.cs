@@ -15,7 +15,7 @@ public class DoorController : MonoBehaviour
     private bool isDoorUnlocked = false;
     private Animator doorAnimator; // R�f�rence � l'Animator de la porte
     private Animator fadeSystem;
-    [SerializeField] private CameraFollow cameraFollow;
+    private CameraFollow cameraFollow;
 
     Rigidbody2D playerRb;
     private PlayerController playerController;
@@ -23,6 +23,7 @@ public class DoorController : MonoBehaviour
 
     void Awake()
     {
+        GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         // Cr�e l'instance pour pouvoir l'appeler
         if (instance == null)
         {
