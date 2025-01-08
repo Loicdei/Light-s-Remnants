@@ -3479,6 +3479,10 @@ PrefabInstance:
       propertyPath: lanternLight
       value: 
       objectReference: {fileID: 408534430}
+    - target: {fileID: 5906925415605092931, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 8185518129469670299}
     - target: {fileID: 6846374829151135835, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.389
@@ -3489,11 +3493,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7070667487228435185, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.417
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 7070667487228435185, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.823
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: 8823673724741043041, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3569,6 +3573,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d20c9b90f9dfc141b0d7a26eda2b9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8185518129469670299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+  m_PrefabInstance: {fileID: 8185518129469670284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127274329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8860eee19031548b72dfab551ae293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8738477715734847091
