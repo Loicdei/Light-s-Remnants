@@ -112,7 +112,7 @@ public class DoorController : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        SceneManager.LoadScene("MenuJouable");
+        SceneManager.LoadScene(targetScene.name);
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)
