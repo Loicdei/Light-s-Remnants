@@ -44,6 +44,7 @@ public class DeathController : MonoBehaviour
             grabController.SetPauseState(true);
         }
         playerRb.simulated = false;
+        playerRb.velocity = new Vector2(0,0);
         Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
