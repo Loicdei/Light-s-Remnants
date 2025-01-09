@@ -1,55 +1,74 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-public class Generator : MonoBehaviour
+public class ObjectGenerator : MonoBehaviour
 {
-    public Transform pointA; // Point de départ
-    public Transform pointB; // Point d'arrivée
-    public float spawnInterval = 1f; // Intervalle de génération en secondes
-    public float lifetime = 5f; // Durée de vie maximale de l'objet cloné
+    public Transform pointB;  // Point d'arrivée (Transform)
+    public GameObject objectToClone;  // L'objet à cloner
+    public float cloneInterval = 2f;  // Intervalle entre chaque clonage
+    public float moveSpeed = 5f;  // Vitesse de déplacement de l'objet
+    public float lifetime = 10f;  // Temps avant destruction de l'objet (si non atteint le point B)
 
     private void Start()
     {
-        StartCoroutine(SpawnObjects());
+        StartCoroutine(GenerateObjects());
     }
 
-    private IEnumerator SpawnObjects()
+    private IEnumerator GenerateObjects()
     {
         while (true)
         {
-            GameObject clone = Instantiate(gameObject, pointA.position, Quaternion.identity);
-            Destroy(clone, lifetime);
-            yield return new WaitForSeconds(spawnInterval);
+            // Clone l'objet à la position du générateur (transform)
+            GameObject newObject = Instantiate(objectToClone, transform.position, Quaternion.identity);
+
+            // Déplace l'objet vers le point B
+            StartCoroutine(MoveObject(newObject));
+
+            // Attend l'intervalle avant de générer le prochain objet
+            yield return new WaitForSeconds(cloneInterval);
         }
     }
 
-    private void Update()
+    private IEnumerator MoveObject(GameObject obj)
     {
-        GameObject[] clones = GameObject.FindGameObjectsWithTag(gameObject.tag);
-        foreach (GameObject clone in clones)
+        float startTime = Time.time;
+        Vector3 startPosition = obj.transform.position;
+        Vector3 targetPosition = pointB.position;
+
+        // Déplacement vers le point B
+        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
-            if (Vector3.Distance(clone.transform.position, pointB.position) < 0.1f)
-            {
-                Destroy(clone);
-            }
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            yield return null;
         }
+
+        // Détruire l'objet après avoir atteint le point B
+        Destroy(obj);
     }
 
+    private IEnumerator DestroyObjectAfterTime(GameObject obj)
+    {
+        // Attente de la durée avant la destruction
+        yield return new WaitForSeconds(lifetime);
+        Destroy(obj);
+    }
+
+    // Méthode pour dessiner les Gizmos dans l'éditeur
     private void OnDrawGizmos()
     {
-        if (pointA != null && pointB != null)
+        // Vérifie que pointB est défini avant de dessiner
+        if (pointB != null)
         {
-            // Dessiner une sphère rouge au point A
+            // Définir la couleur des Gizmos pour les points
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(pointA.position, 0.1f);
+            Gizmos.DrawSphere(transform.position, 0.2f);  // Point de départ
 
-            // Dessiner une sphère verte au point B
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(pointB.position, 0.1f);
-
-            // Dessiner une ligne entre point A et point B
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(pointA.position, pointB.position);
+            Gizmos.DrawSphere(pointB.position, 0.2f);  // Point B
+
+            // Dessiner une ligne entre les deux points
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, pointB.position);
         }
     }
 }
