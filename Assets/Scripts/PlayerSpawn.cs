@@ -6,6 +6,12 @@ public class PlayerSpawn : MonoBehaviour
 {
     private void Awake()
     {
-        GameObject.FindGameObjectWithTag("Player").transform.position = transform.position;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Vector3 spawnPosition = transform.position;
+            spawnPosition.y += 1.0f;
+            player.transform.position = spawnPosition;
+        }
     }
 }
