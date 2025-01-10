@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Door : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Door : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || playerInRange && Input.GetAxis("Vertical") > 0)
         {
             if (playerInRange)
             {
