@@ -24,6 +24,9 @@ public class ObjectGenerator : MonoBehaviour
             // Déplace l'objet vers le point B
             StartCoroutine(MoveObject(newObject));
 
+            // Détruit l'objet après un certain temps, même s'il n'a pas atteint le point B
+            StartCoroutine(DestroyObjectAfterTime(newObject));
+
             // Attend l'intervalle avant de générer le prochain objet
             yield return new WaitForSeconds(cloneInterval);
         }
@@ -31,20 +34,22 @@ public class ObjectGenerator : MonoBehaviour
 
     private IEnumerator MoveObject(GameObject obj)
     {
-        float startTime = Time.time;
-        Vector3 startPosition = obj.transform.position;
         Vector3 targetPosition = pointB.position;
 
         // Déplacement vers le point B
-        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
+        while (obj != null && Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
             obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, moveSpeed * Time.deltaTime);
             yield return null;
         }
 
-        // Détruire l'objet après avoir atteint le point B
-        Destroy(obj);
+        // Si l'objet est toujours valide après le déplacement, le détruire
+        if (obj != null)
+        {
+            Destroy(obj);
+        }
     }
+
 
     private IEnumerator DestroyObjectAfterTime(GameObject obj)
     {
