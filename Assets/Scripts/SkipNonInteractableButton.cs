@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 
 public class SkipNonInteractableButton : MonoBehaviour
 {
-    private float navigationCooldown = 0.5f; // Temps minimum entre deux navigations (ralenti)
+    private float navigationCooldown = 0.3f; // Temps minimum entre deux navigations (ralenti)
     private float lastNavigationTime = 0f;   // Moment de la dernière navigation
-    private float verticalInputThreshold = 0.8f; // Seuil pour détecter une direction verticale
+    private float verticalInputThreshold = 0.1f; // Seuil pour détecter une direction verticale
 
     void Update()
     {
