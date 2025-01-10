@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private UnityEvent onLandEvent;
 
+    private Animator animatorlanterne;
+    private GrabController grabController;
+
     private float xInput;
     private bool isGrounded;
     private bool wasGrounded;
@@ -29,6 +32,13 @@ public class PlayerController : MonoBehaviour
     private float jumpBufferCounter; // Compteur pour le jump buffering
     private bool isPaused;
 
+    
+
+    void Start()
+    {
+        animatorlanterne = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
+        grabController = GetComponent<GrabController>();
+    }
     void Update()
     {
         if (isPaused)
@@ -71,7 +81,13 @@ public class PlayerController : MonoBehaviour
             jumpRequest = true;
             isJumping = true;
             jumpBufferCounter = 0; // reset buffer
+
+            if (grabController.isHoldingLantern())
+            {
+                animatorlanterne.SetBool("IsJumping", true);
+            }
             animator.SetBool("IsJumping", true);
+            
         }
 
         // Modifie la hauteur du saut si la touche est relâchée
@@ -99,7 +115,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private void OnLanding()
     {
+        animatorlanterne.SetBool("IsJumping", false);
         animator.SetBool("IsJumping", false);
+        
     }
 
     void Flip()
