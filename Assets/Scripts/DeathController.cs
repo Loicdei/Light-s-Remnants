@@ -43,6 +43,7 @@ public class DeathController : MonoBehaviour
             playerController.SetPauseState(true);
             grabController.SetPauseState(true);
         }
+        GameObject lanterne = GameObject.FindGameObjectWithTag("Lanterne");
         playerRb.simulated = false;
         Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
@@ -51,6 +52,7 @@ public class DeathController : MonoBehaviour
         Vector3 newPlayerSpawn = playerSpawn.position;
         newPlayerSpawn.y += 1f;
         transform.position = newPlayerSpawn;
+        lanterne.transform.position = newPlayerSpawn;
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
