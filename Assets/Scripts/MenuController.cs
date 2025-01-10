@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
+using Unity.PlasticSCM.Editor.WebApi;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using UnityEditor.SearchService;
 
 public enum PanelType
 {
@@ -23,10 +28,13 @@ public class MenuController : MonoBehaviour
     private GameManager manager;
     private MenuInput inputs;
 
+    private Animator fadeSystem;
+
     private void Start()
     {
         manager = GameManager.instance;
         inputs = GetComponent<MenuInput>();
+        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
 
         //Permet l'ajout de panels dans la liste
         foreach (var _panel in panelsList)
@@ -50,9 +58,21 @@ public class MenuController : MonoBehaviour
     {
         OpenOnePanel(_type);
     }
+    public void StartSceneChange()
+    {
+        StartCoroutine(SceneChangeCoroutine());
+    }
 
-    public void ChangeScene() 
-    { 
+    private IEnumerator SceneChangeCoroutine()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "MenuStatic")
+        {
+            Time.timeScale = 0;
+            fadeSystem.SetTrigger("FadeIn");
+            yield return new WaitForSecondsRealtime(1f);
+            Time.timeScale = 1;
+        }
         manager.ChangeScene();
     }
 

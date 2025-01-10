@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Canvas), typeof(CanvasGroup))]  
+[RequireComponent(typeof(Canvas), typeof(CanvasGroup))]
 
 public class MenuPanel : MonoBehaviour
 {
@@ -17,17 +17,18 @@ public class MenuPanel : MonoBehaviour
 
     private MenuController controller;
 
+
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
     }
 
-    public void init(MenuController _controller){ controller = _controller; }
+    public void init(MenuController _controller) { controller = _controller; }
 
     private void UpdateState()
     {
         canvas.enabled = state;
-        if(state) controller.SetSelectedObject(selectedGameObject, rightPanel, leftPanel);
+        if (state) controller.SetSelectedObject(selectedGameObject, rightPanel, leftPanel);
     }
 
     //Permet d'ouvrir un Panel lorsque aucun panel n'est ouvert
