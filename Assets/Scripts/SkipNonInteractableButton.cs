@@ -1,51 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-//ChatGPT à été utiliser en majorité
-
 public class SkipNonInteractableButton : MonoBehaviour
 {
-    private float navigationCooldown = 0.3f; // Temps minimum entre deux navigations (ralenti)
-    private float lastNavigationTime = 0f;   // Moment de la dernière navigation
-    private float verticalInputThreshold = 0.1f; // Seuil pour détecter une direction verticale
-
-    void Update()
-    {
-        // Vérifier les entrées clavier, manette et D-pad
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // Détecter les mouvements vers le bas ou le haut
-        bool isDown = Input.GetKeyDown(KeyCode.DownArrow) || verticalInput < -verticalInputThreshold;
-        bool isUp = Input.GetKeyDown(KeyCode.UpArrow) || verticalInput > verticalInputThreshold;
-
-        // Navigation bas
-        if (isDown && CanNavigate())
-        {
-            lastNavigationTime = Time.time;
-            Navigate(Direction.Down);
-        }
-
-        // Navigation haut
-        if (isUp && CanNavigate())
-        {
-            lastNavigationTime = Time.time;
-            Navigate(Direction.Up);
-        }
-    }
-
-    private bool CanNavigate()
-    {
-        // Vérifie si suffisamment de temps s'est écoulé depuis la dernière navigation
-        return Time.time - lastNavigationTime > navigationCooldown;
-    }
+    private float verticalInputThreshold = 0.1f; // Seuil pour dÃ©tecter une direction verticale
 
     private enum Direction
     {
         Up,
         Down
+    }
+
+    void Update()
+    {
+        // VÃ©rifier les entrÃ©es clavier, manette et D-pad
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Navigation bas
+        if (Input.GetKeyDown(KeyCode.DownArrow) || verticalInput < -verticalInputThreshold)
+        {
+            Navigate(Direction.Down);
+        }
+
+        // Navigation haut
+        if (Input.GetKeyDown(KeyCode.UpArrow) || verticalInput > verticalInputThreshold)
+        {
+            Navigate(Direction.Up);
+        }
     }
 
     private void Navigate(Direction direction)
@@ -56,36 +39,29 @@ public class SkipNonInteractableButton : MonoBehaviour
         Selectable currentSelectable = current.GetComponent<Selectable>();
         if (currentSelectable == null) return;
 
-        Transform parentPanel = current.transform.parent;
         Selectable nextSelectable = null;
         HashSet<Selectable> visited = new HashSet<Selectable>();
 
-        // Navigation verticale
-        if (direction == Direction.Down)
-            nextSelectable = currentSelectable.FindSelectableOnDown();
-        else if (direction == Direction.Up)
-            nextSelectable = currentSelectable.FindSelectableOnUp();
-
-        while (nextSelectable != null && (!nextSelectable.interactable || nextSelectable.transform.parent != parentPanel))
+        while (true)
         {
-            if (visited.Contains(nextSelectable)) break; // Empêche les boucles infinies
+            nextSelectable = direction == Direction.Down
+                ? currentSelectable.FindSelectableOnDown()
+                : currentSelectable.FindSelectableOnUp();
+
+            // Si aucun autre sÃ©lectable ou si un cycle est dÃ©tectÃ©
+            if (nextSelectable == null || visited.Contains(nextSelectable))
+                break;
+
             visited.Add(nextSelectable);
 
-            nextSelectable = direction == Direction.Down
-                ? nextSelectable.FindSelectableOnDown()
-                : nextSelectable.FindSelectableOnUp();
-        }
+            // Si le prochain sÃ©lectable est interactable, on le sÃ©lectionne
+            if (nextSelectable.interactable)
+            {
+                EventSystem.current.SetSelectedGameObject(nextSelectable.gameObject);
+                break;
+            }
 
-        if (nextSelectable != null && nextSelectable.transform.parent == parentPanel)
-        {
-            StartCoroutine(SelectButtonWithDelay(nextSelectable));
+            currentSelectable = nextSelectable;
         }
-    }
-
-    private IEnumerator SelectButtonWithDelay(Selectable button)
-    {
-        yield return new WaitForSeconds(0.1f); // Attendez un court délai avant de changer la sélection
-        EventSystem.current.SetSelectedGameObject(null); // Réinitialiser la sélection
-        EventSystem.current.SetSelectedGameObject(button.gameObject); // Sélectionner le bouton trouvé
     }
 }

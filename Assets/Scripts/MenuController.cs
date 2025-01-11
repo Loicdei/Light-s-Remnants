@@ -43,7 +43,7 @@ public class MenuController : MonoBehaviour
             _panel.init(this);
         }
 
-        //Ouvre par défaut le Main panel
+        //Ouvre par dï¿½faut le Main panel
         OpenOnePanel(PanelType.Main);
     }
 
