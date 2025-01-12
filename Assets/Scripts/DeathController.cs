@@ -52,7 +52,10 @@ public class DeathController : MonoBehaviour
         Vector3 newPlayerSpawn = playerSpawn.position;
         newPlayerSpawn.y += 1f;
         transform.position = newPlayerSpawn;
-        lanterne.transform.position = newPlayerSpawn;
+        if (!grabController.isHolding)
+        {
+            lanterne.transform.position = newPlayerSpawn;
+        }
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
