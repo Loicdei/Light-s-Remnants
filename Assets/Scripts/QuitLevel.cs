@@ -1,26 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuitLevel : MonoBehaviour
 {
-    private BoxCollider2D boxCollider;
     private bool playerInRange;
-    // Update is called once per frame
-    void Start()
+    private Animator fadeSystem;
+    Rigidbody2D playerRb;
+    private PlayerController playerController;
+    private GrabController grabController;
+    private bool isTransitioning = false;
+
+    private void Awake()
     {
-        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        grabController = GameObject.FindGameObjectWithTag("Player").GetComponent<GrabController>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
-            // Assuming you have a way to check if the player is in range
-            if (playerInRange)
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("MenuJouable");
-            }
+            StartCoroutine(TransitionLevel());
         }
     }
 
@@ -37,6 +42,31 @@ public class QuitLevel : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInRange = false;
+        }
+    }
+
+    private IEnumerator TransitionLevel()
+    {
+        if (isTransitioning) yield break;
+        isTransitioning = true;
+
+        if (playerController != null)
+        {
+            playerController.SetPauseState(true);
+            grabController.SetPauseState(true);
+        }
+        playerRb.simulated = false;
+        Time.timeScale = 0;
+        fadeSystem.SetTrigger("FadeIn");
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("MenuJouable");
+        yield return new WaitForSecondsRealtime(1f);
+        playerRb.simulated = true;
+        if (playerController != null)
+        {
+            playerController.SetPauseState(false);
+            grabController.SetPauseState(false);
         }
     }
 }
