@@ -8,17 +8,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSpeed = 8f;
 
     [SerializeField] private float jumpForce = 16f; // Force du saut initial
-    [SerializeField] private float variableJumpHeightMultiplier = 0.5f; // Modifie la hauteur du saut si la touche est relâchée
-    [SerializeField] private float coyoteTimeDuration = 0.1f; // Temps pendant lequel le joueur peut sauter après avoir quitté une plateforme
-    [SerializeField] private float jumpBufferTime = 0.1f; // Temps pendant lequel une pression de saut est "enregistrée" avant d'atterrir
+    [SerializeField] private float variableJumpHeightMultiplier = 0.5f; // Modifie la hauteur du saut si la touche est relï¿½chï¿½e
+    [SerializeField] private float coyoteTimeDuration = 0.1f; // Temps pendant lequel le joueur peut sauter aprï¿½s avoir quittï¿½ une plateforme
+    [SerializeField] private float jumpBufferTime = 0.1f; // Temps pendant lequel une pression de saut est "enregistrï¿½e" avant d'atterrir
     [SerializeField] private float maxFallSpeed = -15f; // Vitesse de chute maximale
 
     [SerializeField] private LayerMask groundLayer; // Layer du sol
-    [SerializeField] private BoxCollider2D groundCheck; // BoxCollider2D pour la détection du sol
+    [SerializeField] private BoxCollider2D groundCheck; // BoxCollider2D pour la dï¿½tection du sol
     [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private Animator animator;
     [SerializeField] private UnityEvent onLandEvent;
+    private Animator animatorLantern;
+    private GrabController grabController;
 
     private float xInput;
     private bool isGrounded;
@@ -28,7 +30,11 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter; // Compteur pour le coyote time
     private float jumpBufferCounter; // Compteur pour le jump buffering
     private bool isPaused;
-
+    void Start()
+    {
+        animatorLantern = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
+        grabController = GetComponent<GrabController>();
+    }
     void Update()
     {
         if (isPaused)
@@ -72,9 +78,14 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             jumpBufferCounter = 0; // reset buffer
             animator.SetBool("IsJumping", true);
+            if (grabController.isHoldingLantern())
+            {
+                animatorLantern.SetBool("IsJumping", true);
+            }
+
         }
 
-        // Modifie la hauteur du saut si la touche est relâchée
+        // Modifie la hauteur du saut si la touche est relï¿½chï¿½e
         if (Input.GetButtonUp("Jump") && isJumping)
         {
             if (rb.velocity.y > 0)
@@ -100,6 +111,7 @@ public class PlayerController : MonoBehaviour
     private void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+        animatorLantern.SetBool("IsJumping", false);
     }
 
     void Flip()
@@ -107,17 +119,17 @@ public class PlayerController : MonoBehaviour
         // Retourne le sprite selon sa direction
         if (xInput < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1); // Retourner à gauche
+            transform.localScale = new Vector3(-1, 1, 1); // Retourner ï¿½ gauche
         }
         else if (xInput > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); // Retourner à droite
+            transform.localScale = new Vector3(1, 1, 1); // Retourner ï¿½ droite
         }
     }
 
     void FixedUpdate()
     {
-        // Déplacement horizontal avec interpolation pour un mouvement fluide
+        // Dï¿½placement horizontal avec interpolation pour un mouvement fluide
         if (xInput != 0)
         {
             rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, xInput * maxSpeed, acceleration * Time.fixedDeltaTime), rb.velocity.y);
@@ -127,11 +139,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, deceleration * Time.fixedDeltaTime), rb.velocity.y);
         }
 
-        // Applique la force de saut si un saut est demandé
+        // Applique la force de saut si un saut est demandï¿½
         if (jumpRequest)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpRequest = false; // Réinitialise la demande de saut après l'avoir effectuée
+            jumpRequest = false; // Rï¿½initialise la demande de saut aprï¿½s l'avoir effectuï¿½e
         }
 
         // Limite la vitesse de chute
