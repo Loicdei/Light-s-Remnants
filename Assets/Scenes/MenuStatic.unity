@@ -1398,6 +1398,7 @@ GameObject:
   - component: {fileID: 638126343}
   - component: {fileID: 638126342}
   - component: {fileID: 638126341}
+  - component: {fileID: 638126344}
   m_Layer: 5
   m_Name: BtnStart
   m_TagString: Untagged
@@ -1447,7 +1448,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1519,6 +1520,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638126339}
   m_CullTransparentMesh: 1
+--- !u!114 &638126344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638126339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b496b57733da84397f8bd42969849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &639677357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2747,6 +2760,7 @@ GameObject:
   - component: {fileID: 984731565}
   - component: {fileID: 984731564}
   - component: {fileID: 984731567}
+  - component: {fileID: 984731568}
   m_Layer: 5
   m_Name: BtnCredits
   m_TagString: Untagged
@@ -2796,7 +2810,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2882,6 +2896,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   onSwitchBackAction: {fileID: 707095447}
+--- !u!114 &984731568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984731562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b496b57733da84397f8bd42969849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &994658965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3086,7 @@ GameObject:
   - component: {fileID: 1012588496}
   - component: {fileID: 1012588495}
   - component: {fileID: 1012588494}
+  - component: {fileID: 1012588497}
   m_Layer: 5
   m_Name: BtnQuit
   m_TagString: Untagged
@@ -3109,7 +3136,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3181,6 +3208,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012588492}
   m_CullTransparentMesh: 1
+--- !u!114 &1012588497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012588492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b496b57733da84397f8bd42969849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038935507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +3233,7 @@ GameObject:
   - component: {fileID: 1038935511}
   - component: {fileID: 1038935510}
   - component: {fileID: 1038935509}
+  - component: {fileID: 1038935513}
   m_Layer: 5
   m_Name: BtnOptions
   m_TagString: Untagged
@@ -3257,7 +3297,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3329,6 +3369,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038935507}
   m_CullTransparentMesh: 1
+--- !u!114 &1038935513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038935507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b496b57733da84397f8bd42969849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1169988569
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,6 +5012,7 @@ GameObject:
   - component: {fileID: 1929586890}
   - component: {fileID: 1929586889}
   - component: {fileID: 1929586888}
+  - component: {fileID: 1929586891}
   m_Layer: 5
   m_Name: BtnContinue
   m_TagString: Untagged
@@ -5009,7 +5062,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9960785, g: 0.87843144, b: 0.48235297, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5069,6 +5122,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929586886}
   m_CullTransparentMesh: 1
+--- !u!114 &1929586891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929586886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b496b57733da84397f8bd42969849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010196402
 GameObject:
   m_ObjectHideFlags: 0
