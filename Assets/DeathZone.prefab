@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9156405445071092313}
   - component: {fileID: 1738610367388573465}
+  - component: {fileID: 7427881551420172728}
   m_Layer: 0
   m_Name: DeathZone
   m_TagString: Obstacle
@@ -77,3 +78,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 33.657722, y: 4.478339}
   m_EdgeRadius: 0
+--- !u!114 &7427881551420172728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743093281169285693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9ef964ff0a202419683585a7f139df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
