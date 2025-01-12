@@ -19,7 +19,7 @@ public class QuitLevel : MonoBehaviour
             // Assuming you have a way to check if the player is in range
             if (playerInRange)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("testlevel");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MenuJouable");
             }
         }
     }
