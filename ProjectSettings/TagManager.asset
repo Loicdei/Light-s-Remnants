@@ -10,6 +10,7 @@ TagManager:
   - PlayerSpawn
   - FadeSystem
   - Obstacle
+  - LanternLight
   layers:
   - Default
   - TransparentFX
