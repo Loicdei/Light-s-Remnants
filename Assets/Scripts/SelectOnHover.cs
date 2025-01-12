@@ -12,6 +12,13 @@ public class SelectOnHover : MonoBehaviour, IPointerEnterHandler
     {
         button = GetComponent<Button>();
     }
+    void Update()
+    {
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
