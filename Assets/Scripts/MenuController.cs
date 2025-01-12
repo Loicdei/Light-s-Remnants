@@ -30,6 +30,8 @@ public class MenuController : MonoBehaviour
 
     private Animator fadeSystem;
 
+    private Button[] buttons;
+
     private void Start()
     {
         manager = GameManager.instance;
@@ -45,6 +47,10 @@ public class MenuController : MonoBehaviour
 
         //Ouvre par d�faut le Main panel
         OpenOnePanel(PanelType.Main);
+    }
+    private void Awake()
+    {
+        buttons = FindObjectsOfType<Button>();
     }
 
     private void OpenOnePanel(PanelType _type)
@@ -63,8 +69,19 @@ public class MenuController : MonoBehaviour
         StartCoroutine(SceneChangeCoroutine());
     }
 
-    private IEnumerator SceneChangeCoroutine()
+    private void SetButtonsInteractable(bool interactable)
     {
+        foreach (var button in buttons)
+        {
+            button.interactable = interactable;
+        }
+    }
+
+    public IEnumerator SceneChangeCoroutine()
+    {
+        // Désactiver tous les boutons
+        SetButtonsInteractable(false);
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == "MenuStatic")
         {
@@ -74,6 +91,7 @@ public class MenuController : MonoBehaviour
             Time.timeScale = 1;
         }
         manager.ChangeScene();
+        SetButtonsInteractable(true);
     }
 
     public void Quit()
