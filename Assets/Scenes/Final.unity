@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &185006922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +943,7 @@ PrefabInstance:
     - target: {fileID: 423359983881222142, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a4c473d626ac28469aed7356a952554, type: 3}
+      objectReference: {fileID: 21300000, guid: 02713b551f43fe6489e62dcfc5ae9246, type: 3}
     - target: {fileID: 423359983881222142, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -955,7 +955,7 @@ PrefabInstance:
     - target: {fileID: 2320009617934910057, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: beaconOn
       value: 
-      objectReference: {fileID: 21300000, guid: 1a4c473d626ac28469aed7356a952554, type: 3}
+      objectReference: {fileID: 21300000, guid: 02713b551f43fe6489e62dcfc5ae9246, type: 3}
     - target: {fileID: 2320009617934910057, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: beaconOff
       value: 
