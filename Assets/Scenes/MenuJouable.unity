@@ -379,7 +379,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: d7c3a68f370691742a4d82fd1e3be727, type: 3}
+  scene: {fileID: 102900000, guid: 9cee850f235003a4789c9fc9644980d4, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &211162599
 SpriteRenderer:
@@ -672,7 +672,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 4be27210d9f8b644695449793e5ebe24, type: 3}
+  scene: {fileID: 102900000, guid: 3bf0e9ca66b913046abae147038c66bc, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &438687128
 SpriteRenderer:
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 3bf0e9ca66b913046abae147038c66bc, type: 3}
+  scene: {fileID: 102900000, guid: 9c47444b9e5bb2e42ac952d13f99f435, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &577744650
 SpriteRenderer:
@@ -1558,7 +1558,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 2b9030e079af7904a970bb86603c82ee, type: 3}
+  scene: {fileID: 102900000, guid: 4be27210d9f8b644695449793e5ebe24, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &874656417
 SpriteRenderer:
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+  scene: {fileID: 102900000, guid: 2ab2cf67427765f49904012fccc8ed7c, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &1068123323
 SpriteRenderer:
@@ -1993,6 +1993,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1923003200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1201601273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4027107302089938140, guid: 13a32cc325b03974cb950b2d4a423290, type: 3}
+  m_PrefabInstance: {fileID: 782573357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246994901
 GameObject:
   m_ObjectHideFlags: 0
@@ -17064,6 +17069,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!1 &1424052841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424052843}
+  - component: {fileID: 1424052842}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1424052842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424052841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24fe8823cbb0034cb20715ed65b6af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 1201601273}
+--- !u!4 &1424052843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424052841}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 139.48492, y: 84.434845, z: -0.4486462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1474947237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7599765745484200117, guid: 8f41abb41ec1c1844a7cc9cc86808acf, type: 3}
@@ -17170,7 +17221,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 2e231cd6fa7ea18488e27b00f9bbabaa, type: 3}
+  scene: {fileID: 102900000, guid: 2b9030e079af7904a970bb86603c82ee, type: 3}
   isDoorUnlocked: 1
 --- !u!61 &1584127774
 BoxCollider2D:
@@ -17667,7 +17718,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+  scene: {fileID: 102900000, guid: 2e231cd6fa7ea18488e27b00f9bbabaa, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &1846323253
 SpriteRenderer:
@@ -17815,7 +17866,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 9c47444b9e5bb2e42ac952d13f99f435, type: 3}
+  scene: {fileID: 102900000, guid: d7c3a68f370691742a4d82fd1e3be727, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &1873815716
 SpriteRenderer:
@@ -18020,7 +18071,7 @@ MonoBehaviour:
   SpriteDoorOpen: {fileID: 21300000, guid: 333944da410115c4da56c9343b0e7015, type: 3}
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
-  scene: {fileID: 102900000, guid: 9cee850f235003a4789c9fc9644980d4, type: 3}
+  scene: {fileID: 102900000, guid: 2e4da33de8f097c419aa77d4749e5bbe, type: 3}
   isDoorUnlocked: 1
 --- !u!212 &1894760051
 SpriteRenderer:
@@ -18154,3 +18205,4 @@ SceneRoots:
   - {fileID: 1880486837}
   - {fileID: 782573357}
   - {fileID: 1308342743}
+  - {fileID: 1424052843}
