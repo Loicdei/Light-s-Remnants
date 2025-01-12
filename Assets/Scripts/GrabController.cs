@@ -16,7 +16,7 @@ public class GrabController : MonoBehaviour
     private Vector2 originalColliderSize;
 
     private GameObject heldItem = null; // R�f�rence � l'objet tenu
-    private bool isHolding = false;     // Indique si on tient un objet
+    public bool isHolding = false;     // Indique si on tient un objet
     private PolygonCollider2D playerCollider;  // R�f�rence au collider du joueur
     private bool canGrab = true;
 
