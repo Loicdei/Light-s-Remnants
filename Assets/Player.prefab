@@ -239,6 +239,7 @@ MonoBehaviour:
   focusZoom: 5
   normalZoom: 10
   zoomSpeed: 2
+  intensiteFocusMode: 4
 --- !u!60 &6052333454571843748
 PolygonCollider2D:
   m_ObjectHideFlags: 0
