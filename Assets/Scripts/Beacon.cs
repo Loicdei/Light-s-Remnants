@@ -11,7 +11,7 @@ public class Beacon : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float lightIntensityTarget = 1.5f;
     public float lightRadiusTarget = 5f;
-    public GrabController grabController;
+    private GrabController grabController;
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class Beacon : MonoBehaviour
         spriteRenderer.sprite = beaconOff;
         beaconLight.intensity = 0f;
         beaconLight.pointLightOuterRadius = 0f;
+        grabController = GameObject.FindGameObjectWithTag("Player").GetComponent<GrabController>();
     }
 
     void Update()
