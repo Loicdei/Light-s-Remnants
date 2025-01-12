@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4107156832061861170}
   - component: {fileID: 5906925415605092931}
   - component: {fileID: 6052333454571843748}
-  - component: {fileID: 5902266266705700694}
+  - component: {fileID: 3974459974918150255}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -233,6 +233,7 @@ MonoBehaviour:
   verticalThrowMultiplier: 2
   waitingTime: 0.5
   enlargedColliderSize: 1.5
+  isHolding: 0
   mainCamera: {fileID: 0}
   lanternLight: {fileID: 0}
   focusZoom: 5
@@ -291,7 +292,7 @@ PolygonCollider2D:
       - {x: 0.18963285, y: -0.95238096}
       - {x: 0.26330197, y: 0.38132387}
   m_UseDelaunayMesh: 0
---- !u!114 &5902266266705700694
+--- !u!114 &3974459974918150255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,7 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d20c9b90f9dfc141b0d7a26eda2b9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFollow: {fileID: 0}
 --- !u!1 &5673718559494975256
 GameObject:
   m_ObjectHideFlags: 0
