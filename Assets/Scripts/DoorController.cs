@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer closeLock;
-    [SerializeField] private SceneAsset targetScene;
+    [SerializeField] private string targetScene;
     public static DoorController instance;  // Singleton pour un acc�s global
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la sc�ne
     private bool playerInRange = false;
@@ -112,7 +109,7 @@ public class DoorController : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync(targetScene.name);
+        SceneManager.LoadSceneAsync(targetScene);
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)

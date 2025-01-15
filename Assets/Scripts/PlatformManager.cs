@@ -19,11 +19,6 @@ public class PlatformManager : MonoBehaviour
         // Évitez d'exécuter toute logique complexe ici
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (boxCollider == null) boxCollider = GetComponent<BoxCollider2D>();
-
-        EditorApplication.delayCall += () =>
-        {
-            if (this != null) ResizePlatform(); // S'assure que la logique est appelée en dehors du pipeline de validation
-        };
     }
 
     private void ResizePlatform()

@@ -1,11 +1,10 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FinalLevel : MonoBehaviour
 {
-    [SerializeField] private SceneAsset targetScene; // Scène cible pour la transition
+    [SerializeField] private string targetScene;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D transitionLight; // Lumière pour l'effet
     [SerializeField] private GrabController grabController;
 
@@ -49,7 +48,7 @@ public class FinalLevel : MonoBehaviour
         StartCoroutine(TransitionLightEffect());
 
         yield return new WaitForSeconds(1f); // Attend la fin de l'effet lumineux
-        SceneManager.LoadSceneAsync(targetScene.name); // Charge la nouvelle scène
+        SceneManager.LoadSceneAsync(targetScene); // Charge la nouvelle scène
     }
 
     private IEnumerator TransitionLightEffect()

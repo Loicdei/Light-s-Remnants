@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuJouable.unity
     guid: d897196161ae0144398efd72593ba433
   - enabled: 1
-    path: Assets/Scenes/TestLevel.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/First.unity
     guid: 2e231cd6fa7ea18488e27b00f9bbabaa
   - enabled: 1
@@ -47,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Eleventh.unity
     guid: 4edb7f47d996b7f4dbfeee41066c5089
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: a3a528d5a5fe2f448889a2e674d06793
   m_configObjects: {}

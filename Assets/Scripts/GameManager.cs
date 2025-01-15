@@ -1,10 +1,9 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance {  get; private set; }
+    public static GameManager instance { get; private set; }
 
     private void Awake()
     {
@@ -13,14 +12,12 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
             return;
         }
-         instance = this;
+        instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-
-    [SerializeField] SceneAsset scene;
-    public void ChangeScene()
+    public void ChangeScene(string scene)
     {
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(scene);
     }
 
     public void Quit()

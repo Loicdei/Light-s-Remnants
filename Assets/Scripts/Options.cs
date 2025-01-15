@@ -43,15 +43,15 @@ public class Options : MonoBehaviour
 
     private void UpdateVolume(float _value)
     {
-        print("Audio Volume : " +  _value);
-        audioMixer.SetFloat("Master", Mathf.Lerp(-100, 0 , _value));
+        print("Audio Volume : " + _value);
+        audioMixer.SetFloat("Master", Mathf.Lerp(-100, 0, _value));
     }
 
     private void UpdateResolution(int _value)
     {
         currentResolutionID = _value;
-        Screen.SetResolution(resolutions[currentResolutionID].height, resolutions[currentResolutionID].width, Screen.fullScreen); 
-        print("Résolution ID : " + _value);
+        Screen.SetResolution(resolutions[currentResolutionID].width, resolutions[currentResolutionID].height, Screen.fullScreen);
+        print("Rï¿½solution ID : " + _value);
     }
 
     private void ToggleFullscreen(bool _value)

@@ -3,10 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-using UnityEditor.SearchService;
 
 public enum PanelType
 {
@@ -90,7 +87,7 @@ public class MenuController : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
             Time.timeScale = 1;
         }
-        manager.ChangeScene();
+        manager.ChangeScene("MenuJouable");
         SetButtonsInteractable(true);
     }
 

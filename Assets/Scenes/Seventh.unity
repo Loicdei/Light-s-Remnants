@@ -4756,8 +4756,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2471927630011246089, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: targetScene
-      value: 
-      objectReference: {fileID: 102900000, guid: 9cee850f235003a4789c9fc9644980d4, type: 3}
+      value: Eighth
+      objectReference: {fileID: 0}
     - target: {fileID: 2848209016306373092, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96.02786

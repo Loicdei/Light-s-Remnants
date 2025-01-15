@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.SceneManagement;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Door : MonoBehaviour
 {
     [SerializeField] Sprite SpriteDoorOpen;
     [SerializeField] Sprite SpriteDoorLocked;
     [SerializeField] Sprite SpriteDoorClosed;
-    [SerializeField] SceneAsset scene;
+    [SerializeField] private string scene;
     private Animator fadeSystem;
 
     private bool playerInRange = false;
@@ -44,7 +42,7 @@ public class Door : MonoBehaviour
             }
             else
             {
-            // Animation Shake door + sound effect
+                // Animation Shake door + sound effect
             }
         }
     }
@@ -64,7 +62,7 @@ public class Door : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(scene);
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)
