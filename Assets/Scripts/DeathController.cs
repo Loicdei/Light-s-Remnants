@@ -45,6 +45,9 @@ public class DeathController : MonoBehaviour
         }
         GameObject lanterne = GameObject.FindGameObjectWithTag("Lanterne");
         playerRb.simulated = false;
+        Animator playerAnimator = GetComponent<Animator>();
+        playerAnimator.Play("Player_Idle");
+        playerRb.velocity = new Vector2(0,0);
         Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
@@ -56,9 +59,14 @@ public class DeathController : MonoBehaviour
         {
             lanterne.transform.position = newPlayerSpawn;
         }
+        // S'assurer que le personnage est tourne vers la droite
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x);
+        transform.localScale = scale;
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);
+        playerRb.velocity = new Vector2(0, 0);
         playerRb.simulated = true;
         if (playerController != null)
         {
@@ -66,4 +74,5 @@ public class DeathController : MonoBehaviour
             grabController.SetPauseState(false);
         }
     }
+
 }
