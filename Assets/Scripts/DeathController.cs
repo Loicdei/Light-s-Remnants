@@ -5,7 +5,7 @@ public class DeathController : MonoBehaviour
 {
     private Transform playerSpawn;
     private Animator fadeSystem;
-    public CameraFollow cameraFollow;
+    private CameraFollow cameraFollow;
 
     Rigidbody2D playerRb;
     private PlayerController playerController;
@@ -43,6 +43,7 @@ public class DeathController : MonoBehaviour
             playerController.SetPauseState(true);
             grabController.SetPauseState(true);
         }
+        GameObject lanterne = GameObject.FindGameObjectWithTag("Lanterne");
         playerRb.simulated = false;
         playerRb.velocity = new Vector2(0,0);
         Time.timeScale = 0;
@@ -52,6 +53,10 @@ public class DeathController : MonoBehaviour
         Vector3 newPlayerSpawn = playerSpawn.position;
         newPlayerSpawn.y += 1f;
         transform.position = newPlayerSpawn;
+        if (!grabController.isHolding)
+        {
+            lanterne.transform.position = newPlayerSpawn;
+        }
         cameraFollow.setSmoothTime(0f);
         yield return new WaitForSecondsRealtime(1f);
         cameraFollow.setSmoothTime(0.25f);

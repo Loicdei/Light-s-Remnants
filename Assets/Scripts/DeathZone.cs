@@ -3,31 +3,23 @@ using System.Collections;
 
 public class DeathZone : MonoBehaviour
 {
-    private Transform playerSpawn;
-    private Animator fadeSystem;
-    [SerializeField] private CameraFollow cameraFollow;
+    private Transform player;
 
     private void Awake()
     {
-        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
-        fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+    { 
+        if (collision.CompareTag("Lanterne"))
         {
-            StartCoroutine(ReplacePlayer(collision));
+            collision.transform.position = player.position;
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
-    }
-
-    private IEnumerator ReplacePlayer(Collider2D collision)
-    {
-        fadeSystem.SetTrigger("FadeIn");
-        yield return new WaitForSeconds(1f);
-        cameraFollow.setSmoothTime(0f);
-        collision.transform.position = playerSpawn.position;
-        yield return new WaitForSeconds(1f);
-        cameraFollow.setSmoothTime(0.25f);
     }
 }

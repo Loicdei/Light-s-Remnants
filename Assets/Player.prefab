@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 897290126269911424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.469, y: -0.503, z: 0}
+  m_LocalPosition: {x: 0.445, y: -0.442, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,8 +46,7 @@ GameObject:
   - component: {fileID: 4107156832061861170}
   - component: {fileID: 5906925415605092931}
   - component: {fileID: 6052333454571843748}
-  - component: {fileID: 5902266266705700694}
-  - component: {fileID: 3944801390339356511}
+  - component: {fileID: 3974459974918150255}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -64,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 4537832860919671365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: -7, y: -2, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -234,11 +233,13 @@ MonoBehaviour:
   verticalThrowMultiplier: 2
   waitingTime: 0.5
   enlargedColliderSize: 1.5
+  isHolding: 0
   mainCamera: {fileID: 0}
   lanternLight: {fileID: 0}
   focusZoom: 5
   normalZoom: 10
   zoomSpeed: 2
+  intensiteFocusMode: 4
 --- !u!60 &6052333454571843748
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -292,19 +293,7 @@ PolygonCollider2D:
       - {x: 0.18963285, y: -0.95238096}
       - {x: 0.26330197, y: 0.38132387}
   m_UseDelaunayMesh: 0
---- !u!114 &5902266266705700694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4537832860919671365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d20c9b90f9dfc141b0d7a26eda2b9d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3944801390339356511
+--- !u!114 &3974459974918150255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

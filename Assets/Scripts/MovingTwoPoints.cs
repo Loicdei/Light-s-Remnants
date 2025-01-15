@@ -26,40 +26,27 @@ public class MovingTwoPoints : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentTarget = pointA.position;
-        lastPosition = rb.position;
-    }
-
-    void Update()
-    {
-        // Déplacer l'objet vers le point ciblé
-        Vector2 position = rb.position;
-        Vector2 direction = (currentTarget - position).normalized;
-        rb.velocity = direction * speed;
-
-        // Vérifie si l'objet est proche du point
-        if (Vector2.Distance(position, currentTarget) <= stoppingDistance)
-        {
-            // Change la target
-            currentTarget = (currentTarget == (Vector2)pointA.position) ? pointB.position : pointA.position;
-        }
+        currentTarget = pointB.position;  // Initialement se dirige vers pointB
     }
 
     void FixedUpdate()
     {
-        // Calcul du déplacement de la plateforme
-        Vector2 deltaPosition = rb.position - lastPosition;
+        Move();
+    }
 
-        // Notifie les enfants du déplacement
-        foreach (Transform child in transform)
+    void Move()
+    {
+        float distanceToTarget = Vector2.Distance(transform.position, currentTarget);
+
+        if (distanceToTarget < stoppingDistance)
         {
-            if (child.CompareTag("Player"))
-            {
-                child.position += (Vector3)deltaPosition;
-            }
+            currentTarget = currentTarget == (Vector2)pointA.position ? pointB.position : pointA.position;
         }
 
-        lastPosition = rb.position;
+        Vector2 direction = (currentTarget - (Vector2)transform.position).normalized;
+        Vector2 newPosition = (Vector2)transform.position + direction * speed * Time.fixedDeltaTime;
+
+        rb.MovePosition(newPosition);  // Utilisation de MovePosition pour déplacer la plateforme
     }
 
     private void OnDrawGizmos()

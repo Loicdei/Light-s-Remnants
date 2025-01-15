@@ -16,7 +16,7 @@ public class GrabController : MonoBehaviour
     private Vector2 originalColliderSize;
 
     private GameObject heldItem = null; // R�f�rence � l'objet tenu
-    private bool isHolding = false;     // Indique si on tient un objet
+    public bool isHolding = false;     // Indique si on tient un objet
     private PolygonCollider2D playerCollider;  // R�f�rence au collider du joueur
     private bool canGrab = true;
 
@@ -29,16 +29,36 @@ public class GrabController : MonoBehaviour
 
     private bool isHeldItemLantern = false;
     private bool isPaused;
+    private Light2D lumiereLanterne;
+    private float intensiteBase;
+    public float intensiteFocusMode = 10;
+
+    private LayerMask groundLayer;
+    private Vector2 forwardDirection;
+    private Vector2 backwardDirection;
 
     void Start()
     {
         playerCollider = GetComponent<PolygonCollider2D>(); // R�cup�rer le collider du joueur
         originalColliderSize = playerCollider.bounds.size;
         normalZoom = mainCamera.orthographicSize;
+        groundLayer = LayerMask.GetMask("Ground");
+        lumiereLanterne = GameObject.FindGameObjectWithTag("LanternLight").GetComponent<Light2D>();
+        intensiteBase = lumiereLanterne.pointLightOuterRadius;
     }
 
     void Update()
     {
+        if (transform.localScale.x < 0) // Si le personnage regarde à gauche
+        {
+            forwardDirection = Vector2.left;
+            backwardDirection = Vector2.right;
+        }
+        else if (transform.localScale.x > 0) // Si le personnage regarde à droite
+        {
+            forwardDirection = Vector2.right;
+            backwardDirection = Vector2.left;
+        }
         if (isPaused)
         {
             return;
@@ -87,7 +107,10 @@ public class GrabController : MonoBehaviour
                     }
                     else if (heldItem != null)
                     {
-                        ThrowItem(); // Lancer l'objet
+                        if (!IsThrowBlocked())
+                        {
+                            ThrowItem();
+                        }
                     }
                 }
             }
@@ -103,11 +126,13 @@ public class GrabController : MonoBehaviour
     {
         if (enable)
         {
+            StartCoroutine(SmoothLightRadius(intensiteFocusMode + 3, 0.5f));
             StartCoroutine(SmoothZoom(normalZoom + 3)); // D�marrer le zoom fluide vers le focusZoom
             isFocusMode = true;
         }
         else
         {
+            StartCoroutine(SmoothLightRadius(intensiteBase, 0.5f));
             StartCoroutine(SmoothZoom(normalZoom)); // D�marrer le zoom fluide vers le normalZoom
             isFocusMode = false;
         }
@@ -149,6 +174,7 @@ public class GrabController : MonoBehaviour
 
     void ThrowItem()
     {
+        
         ToggleFocusMode(false);
         // R�active la physique de l'objet
         Rigidbody2D itemRb = heldItem.GetComponent<Rigidbody2D>();
@@ -179,12 +205,58 @@ public class GrabController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(grabDetect.position, rayDist); // hitbox 
+        Gizmos.DrawWireSphere(grabDetect.position, rayDist); // hitbox grab
+
+        //  hitbox des detecteurs de murs
+        float raycastDistanceLeft = 0.1f;
+        float raycastDistanceRight = 0.3f; 
+
+        Vector2 raycastStart = itemHolder.position;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(raycastStart, raycastStart + forwardDirection * raycastDistanceLeft);
+
+        Gizmos.color = Color.blue; 
+        Gizmos.DrawLine(raycastStart, raycastStart + backwardDirection * raycastDistanceRight);
     }
 
     public bool isHoldingLantern()
     {
         return isHeldItemLantern;
+    }
+
+    bool IsThrowBlocked()
+    {
+
+        RaycastHit2D hitLeft = Physics2D.Raycast(itemHolder.position, forwardDirection, 0.1f, groundLayer);
+        if (hitLeft.collider != null)
+        {
+            return true; 
+        }
+
+        RaycastHit2D hitRight = Physics2D.Raycast(itemHolder.position, backwardDirection, 0.3f, groundLayer);
+        if (hitRight.collider != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    IEnumerator SmoothLightRadius(float targetRadius, float duration)
+    {
+        float startRadius = lumiereLanterne.pointLightOuterRadius;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            lumiereLanterne.pointLightOuterRadius = Mathf.Lerp(startRadius, targetRadius, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null; // Attendre le prochain frame
+        }
+
+        // Assurez-vous que la portée finale est exactement la valeur cible
+        lumiereLanterne.pointLightOuterRadius = targetRadius;
     }
 
 }
