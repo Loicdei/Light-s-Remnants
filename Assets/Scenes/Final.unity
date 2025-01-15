@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516aa5772670a9748a959950970dcc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: {fileID: 102900000, guid: 2e231cd6fa7ea18488e27b00f9bbabaa, type: 3}
+  targetScene: MenuStatic
   transitionLight: {fileID: 1190139946}
   grabController: {fileID: 8185518129469670291}
 --- !u!1001 &861272183
@@ -1327,6 +1327,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2471927630011246089, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
+      propertyPath: targetScene
+      value: MenuStatic
+      objectReference: {fileID: 0}
     - target: {fileID: 2848209016306373092, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.487316
