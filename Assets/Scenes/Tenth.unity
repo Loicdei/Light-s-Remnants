@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8185518129469670285}
-  minX: 0
+  minX: -1
   maxX: 200
   minY: -5
   maxY: 100
