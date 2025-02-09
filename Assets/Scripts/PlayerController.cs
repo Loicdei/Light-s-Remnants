@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent onLandEvent;
     private Animator animatorLantern;
     private GrabController grabController;
+    [SerializeField] private Joystick joystick;
+    [SerializeField] private Button jumpButton;
+    [SerializeField] private Button lanternButton;
 
     private float xInput;
     private bool isGrounded;
@@ -34,6 +38,14 @@ public class PlayerController : MonoBehaviour
     {
         animatorLantern = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
         grabController = GetComponent<GrabController>();
+
+        #if UNITY_ANDROID || UNITY_IOS
+                joystick.gameObject.SetActive(true); // Active le joystick sur mobile
+                jumpButton.gameObject.SetActive(true); // Active le bouton de saut
+        #else
+                joystick.gameObject.SetActive(false); // Cache le joystick sur PC
+                jumpButton.gameObject.SetActive(false); // Cache les boutons tactiles
+        #endif
     }
     void Update()
     {
@@ -42,7 +54,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        xInput = Input.GetAxisRaw("Horizontal");
+        #if UNITY_ANDROID || UNITY_IOS
+                xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
+        #else 
+                xInput = Input.GetAxisRaw("Horizontal"); // PC : Utiliser le clavier
+        #endif
+            
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
         if (isGrounded)
@@ -151,5 +168,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
         }
+    }
+    public void Jump() // Cette fonction est appelée par le bouton tactile
+    {
+        if (isGrounded || coyoteTimeCounter > 0)
+        {
+            jumpRequest = true;
+            isJumping = true;
+            animator.SetBool("IsJumping", true);
+            if (grabController.isHoldingLantern()) animatorLantern.SetBool("IsJumping", true);
+        }
+    }
+    public void UseLantern()
+    {
+        // Fonction pour attraper/lancer
     }
 }
