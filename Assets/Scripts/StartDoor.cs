@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class QuitLevel : MonoBehaviour
+public class StartDoor : MonoBehaviour
 {
     private bool playerInRange;
     private Animator fadeSystem;
@@ -23,7 +23,8 @@ public class QuitLevel : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInRange)
+        if (Time.timeScale == 0f) return;
+        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
         {
             StartCoroutine(TransitionLevel());
         }

@@ -24,7 +24,8 @@ public class Beacon : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E) && grabController.isHoldingLantern())
+        if (Time.timeScale == 0f) return;
+        if (playerInRange && grabController.isHoldingLantern() && Input.GetButtonDown("BeaconInterract"))
         {
             ToggleBeacon();
         }

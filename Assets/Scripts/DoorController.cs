@@ -41,12 +41,13 @@ public class DoorController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
         if (isDoorUnlocked)
         {
             doorAnimator.SetBool("isOpen", playerInRange);
 
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
-            if (playerInRange && Input.GetAxis("Vertical") > 0)
+            if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
             {
                 StartCoroutine(TransitionLevel());
                 // TODO : Unlock next level
@@ -118,6 +119,4 @@ public class DoorController : MonoBehaviour
             grabController.SetPauseState(false);
         }
     }
-    //fadeSystem.SetTrigger("FadeIn");
-    //yield return new WaitForSecondsRealtime(1f);
 }

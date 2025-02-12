@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FinalLevel : MonoBehaviour
+public class FinalBeacon : MonoBehaviour
 {
     [SerializeField] private string targetScene;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D transitionLight; // Lumière pour l'effet
@@ -20,7 +20,8 @@ public class FinalLevel : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && grabController.isHoldingLantern() && Input.GetKeyDown(KeyCode.E) && !isTransitionning)
+        if (Time.timeScale == 0f) return;
+        if (playerInRange && grabController.isHoldingLantern() && Input.GetButtonDown("BeaconInterract") && !isTransitionning)
         {
             isTransitionning = true;
             StartCoroutine(TransitionLevel());
