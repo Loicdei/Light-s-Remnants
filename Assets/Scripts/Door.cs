@@ -34,17 +34,9 @@ public class Door : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) || playerInRange && Input.GetAxis("Vertical") > 0)
-        {
-            if (playerInRange)
-            {
-                StartCoroutine(OpenDoor());
-            }
-            else
-            {
-                // Animation Shake door + sound effect
-            }
-        }
+        if (Time.timeScale == 0f) return;
+        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+            StartCoroutine(OpenDoor());
     }
 
     private System.Collections.IEnumerator OpenDoor()
@@ -62,7 +54,7 @@ public class Door : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadSceneAsync(scene);
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)

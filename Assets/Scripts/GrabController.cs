@@ -49,6 +49,7 @@ public class GrabController : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) return;
         if (transform.localScale.x < 0) // Si le personnage regarde à gauche
         {
             forwardDirection = Vector2.left;
@@ -75,7 +76,7 @@ public class GrabController : MonoBehaviour
                 if (heldItem.CompareTag("Lanterne"))
                 {
                     // Activer le mode focus avec la touche R
-                    if (Input.GetKeyDown(KeyCode.R))
+                    if (Input.GetButtonDown("Focus"))
                     {
                         ToggleFocusMode(true);
                     }
@@ -98,8 +99,8 @@ public class GrabController : MonoBehaviour
             // V�rifier si un objet est soit un "Item" soit une "Lanterne"
             if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
-                // Saisir ou lancer l'objet avec la touche E
-                if (Input.GetKeyDown(KeyCode.F))
+                // Saisir ou lancer l'objet avec la touche E ou la mannette X ou Y
+                if (Input.GetButtonDown("Grab"))
                 {
                     if (!isHolding)
                     {
@@ -174,7 +175,7 @@ public class GrabController : MonoBehaviour
 
     void ThrowItem()
     {
-        
+
         ToggleFocusMode(false);
         // R�active la physique de l'objet
         Rigidbody2D itemRb = heldItem.GetComponent<Rigidbody2D>();
@@ -209,14 +210,14 @@ public class GrabController : MonoBehaviour
 
         //  hitbox des detecteurs de murs
         float raycastDistanceLeft = 0.1f;
-        float raycastDistanceRight = 0.3f; 
+        float raycastDistanceRight = 0.3f;
 
         Vector2 raycastStart = itemHolder.position;
 
         Gizmos.color = Color.red;
         Gizmos.DrawLine(raycastStart, raycastStart + forwardDirection * raycastDistanceLeft);
 
-        Gizmos.color = Color.blue; 
+        Gizmos.color = Color.blue;
         Gizmos.DrawLine(raycastStart, raycastStart + backwardDirection * raycastDistanceRight);
     }
 
@@ -231,7 +232,7 @@ public class GrabController : MonoBehaviour
         RaycastHit2D hitLeft = Physics2D.Raycast(itemHolder.position, forwardDirection, 0.1f, groundLayer);
         if (hitLeft.collider != null)
         {
-            return true; 
+            return true;
         }
 
         RaycastHit2D hitRight = Physics2D.Raycast(itemHolder.position, backwardDirection, 0.3f, groundLayer);

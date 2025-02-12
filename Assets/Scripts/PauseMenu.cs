@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuCanvas;
+    public GameObject firstButton;
     private bool isPaused = false;
+    private Button selectedButton;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause"))
         {
             if (isPaused)
             {
@@ -19,25 +23,33 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+
+        selectedButton = EventSystem.current.currentSelectedGameObject?.GetComponent<Button>();
     }
 
     public void PauseGame()
     {
         pauseMenuCanvas.SetActive(true);
-        Time.timeScale = 0f; // Arrête le temps de jeu
+        Time.timeScale = 0f;
         isPaused = true;
+
+        // SÃ©lectionne automatiquement le premier bouton
+        EventSystem.current.SetSelectedGameObject(firstButton);
     }
 
     public void ResumeGame()
     {
         pauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f; // Reprend le temps de jeu
+        Time.timeScale = 1f;
         isPaused = false;
+
+        // DÃ©sÃ©lectionne les boutons
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f; // Assurez-vous que le temps est repris avant de changer de scène
-        SceneManager.LoadScene("MenuStatic"); // Remplacez "MainMenu" par le nom de votre scène de menu principal
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MenuStatic");
     }
 }
