@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
                 joystick.gameObject.SetActive(false); // Cache le joystick sur PC
                 jumpButton.gameObject.SetActive(false); // Cache les boutons tactiles
         #endif
+        joystick.gameObject.SetActive(true); // Active le joystick sur mobile
     }
     void Update()
     {
