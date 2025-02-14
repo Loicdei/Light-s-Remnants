@@ -13,6 +13,8 @@ public class StartDoor : MonoBehaviour
     private PlayerController playerController;
     private GrabController grabController;
     private bool isTransitioning = false;
+    // Récupérer et sauvegarder le nom du niveau actuel
+    string currentScene = SceneManager.GetActiveScene().name;
 
     private void Awake()
     {
