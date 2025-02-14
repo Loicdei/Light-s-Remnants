@@ -19,14 +19,9 @@ public class OpenPanelButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (type == PanelType.Main) return; // Ne pas faire le call si c'est Main
-
         controller.OpenPanel(type);
-
-        if (onSwitchBackAction != null)
-            inputs.SetBackListener(onSwitchBackAction.OnClick);
-        else
-            inputs.SetBackListener();
+        if (onSwitchBackAction != null) inputs.SetBackListener(onSwitchBackAction.OnClick);
+        else inputs.SetBackListener();
     }
 
 }
