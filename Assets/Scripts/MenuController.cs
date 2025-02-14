@@ -23,7 +23,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] private EventSystem eventController;
 
     private GameManager manager;
-    private MenuInput inputs;
 
     private Animator fadeSystem;
 
@@ -32,7 +31,6 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         manager = GameManager.instance;
-        inputs = GetComponent<MenuInput>();
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
 
         //Permet l'ajout de panels dans la liste
@@ -80,7 +78,7 @@ public class MenuController : MonoBehaviour
         SetButtonsInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "MenuStatic")
+        if (currentSceneName == "MenuStaticNew")
         {
             Time.timeScale = 0;
             fadeSystem.SetTrigger("FadeIn");
@@ -96,12 +94,12 @@ public class MenuController : MonoBehaviour
         manager.Quit();
     }
 
-    public void SetSelectedObject(GameObject _element, Button _rightPanel, Button _leftPanel)
-    {
-        eventController.SetSelectedGameObject(_element);
+    //public void SetSelectedObject(GameObject _element, Button _rightPanel, Button _leftPanel)
+    //{
+    //    eventController.SetSelectedGameObject(_element);
 
-        if (_rightPanel != null) inputs.SetShoulderListener(MenuInput.Side.Right, _rightPanel.onClick.Invoke, _rightPanel.Select);
-        if (_leftPanel != null) inputs.SetShoulderListener(MenuInput.Side.Left, _leftPanel.onClick.Invoke, _leftPanel.Select);
-    }
+    //    if (_rightPanel != null) inputs.SetShoulderListener(MenuInput.Side.Right, _rightPanel.onClick.Invoke, _rightPanel.Select);
+    //    if (_leftPanel != null) inputs.SetShoulderListener(MenuInput.Side.Left, _leftPanel.onClick.Invoke, _leftPanel.Select);
+    //}
 
 }

@@ -5,23 +5,21 @@ public class OpenPanelButton : MonoBehaviour
 {
     [SerializeField] private PanelType type;
 
-    [SerializeField] private OpenPanelButton onSwitchBackAction;
-
     private MenuController controller;
 
-    private MenuInput inputs;
-
-    void Start()
+    public void OpenpanelOptions()
     {
-      controller = FindObjectOfType<MenuController>();  
-      inputs = controller.GetComponent<MenuInput>();
+        if (Input.GetButtonDown("CustomClick"))
+        {
+            controller.OpenPanel(PanelType.Options);
+        }
     }
 
-    public void OnClick()
+    public void OpenpanelCredits()
     {
-        controller.OpenPanel(type);
-        if (onSwitchBackAction != null) inputs.SetBackListener(onSwitchBackAction.OnClick);
-        else inputs.SetBackListener();
+        if (Input.GetButtonDown("CustomClick"))
+        {
+            controller.OpenPanel(PanelType.Credits);
+        }
     }
-
 }

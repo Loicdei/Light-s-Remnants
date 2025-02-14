@@ -36,7 +36,6 @@ public class MenuPanel : MonoBehaviour
     private void UpdateState()
     {
         canvas.enabled = state;
-        if (state) controller.SetSelectedObject(selectedGameObject, rightPanel, leftPanel);
     }
 
     public void ChangeState()
