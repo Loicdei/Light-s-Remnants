@@ -44,6 +44,8 @@ public class MenuController : MonoBehaviour
 
         //Ouvre par d�faut le Main panel
         OpenOnePanel(PanelType.Main);
+        
+        Debug.Log("PlayerPrefs.GetString MENU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
     }
     private void Awake()
     {
@@ -76,6 +78,8 @@ public class MenuController : MonoBehaviour
 
     public IEnumerator SceneChangeCoroutine()
     {
+        PlayerPrefs.DeleteKey("LastLevel"); // Supprimer la scène sauvegardée
+
         // Désactiver tous les boutons
         SetButtonsInteractable(false);
 
@@ -93,11 +97,17 @@ public class MenuController : MonoBehaviour
 
      public void StartSceneChangeContinue()
     {
-        StartCoroutine(SceneChangeCoroutine());
+        StartCoroutine(SceneChangeCoroutineContinue());
     }
 
     public IEnumerator SceneChangeCoroutineContinue()
     {
+
+        // Lire le nom de la scène sauvegardée
+        string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
+        Debug.Log("PlayerPrefs.GetString MENU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
+        
+
         // Désactiver tous les boutons
         SetButtonsInteractable(false);
 
@@ -109,9 +119,11 @@ public class MenuController : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
             Time.timeScale = 1;
         }
-        manager.ChangeScene("MenuJouable");
+        SceneManager.LoadSceneAsync(savedScene);
         SetButtonsInteractable(true);
     }
+
+
 
     public void Quit()
     {

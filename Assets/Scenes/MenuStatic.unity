@@ -4809,7 +4809,7 @@ GameObject:
   - component: {fileID: 1384604823}
   m_Layer: 5
   m_Name: BtnContinue
-  m_TagString: SaveManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4862,7 +4862,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 1012588494}
+    m_SelectOnDown: {fileID: 1706490297}
     m_SelectOnLeft: {fileID: 984731564}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5654,7 +5654,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1384604824}
     m_SelectOnDown: {fileID: 1012588494}
     m_SelectOnLeft: {fileID: 984731564}
     m_SelectOnRight: {fileID: 0}
