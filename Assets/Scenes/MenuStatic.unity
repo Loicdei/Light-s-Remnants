@@ -1200,6 +1200,7 @@ GameObject:
   - component: {fileID: 462626299}
   - component: {fileID: 462626301}
   - component: {fileID: 462626300}
+  - component: {fileID: 462626302}
   m_Layer: 5
   m_Name: CanvasMenu
   m_TagString: Untagged
@@ -1352,6 +1353,20 @@ MonoBehaviour:
   m_DefaultActionMap: MenuNavigation
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &462626302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462626294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320bae9202890524bb987906f57d029f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  onSwitchBackAction: {fileID: 0}
 --- !u!1 &481650165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,7 +2789,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909244190}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -3347,7 +3362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  selectedGameObject: {fileID: 0}
+  selectedGameObject: {fileID: 1706490294}
   rightPanel: {fileID: 0}
   leftPanel: {fileID: 0}
 --- !u!1 &1012588492
@@ -3566,7 +3581,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1706490297}
     m_SelectOnDown: {fileID: 1012588494}
     m_SelectOnLeft: {fileID: 984731564}
     m_SelectOnRight: {fileID: 0}
@@ -5374,7 +5389,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 1012588494}
+    m_SelectOnDown: {fileID: 1038935510}
     m_SelectOnLeft: {fileID: 984731564}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -6402,7 +6417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0895e776895b94081e87f710494b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: d897196161ae0144398efd72593ba433, type: 3}
 --- !u!114 &2038537568
 MonoBehaviour:
   m_ObjectHideFlags: 0
