@@ -91,6 +91,28 @@ public class MenuController : MonoBehaviour
         SetButtonsInteractable(true);
     }
 
+     public void StartSceneChangeContinue()
+    {
+        StartCoroutine(SceneChangeCoroutine());
+    }
+
+    public IEnumerator SceneChangeCoroutineContinue()
+    {
+        // Désactiver tous les boutons
+        SetButtonsInteractable(false);
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "MenuStatic")
+        {
+            Time.timeScale = 0;
+            fadeSystem.SetTrigger("FadeIn");
+            yield return new WaitForSecondsRealtime(1f);
+            Time.timeScale = 1;
+        }
+        manager.ChangeScene("MenuJouable");
+        SetButtonsInteractable(true);
+    }
+
     public void Quit()
     {
         manager.Quit();

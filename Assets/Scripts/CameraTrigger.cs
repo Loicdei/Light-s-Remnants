@@ -7,11 +7,11 @@ public class CameraTrigger : MonoBehaviour
     public Vector2 newCameraPosition;
     public float transitionTime = 1f;
     public float newCameraSize = 5; // zoom (de base 5)
-    [SerializeField] private CameraFollow cameraFollow; // Référence au script CameraFollow
+    [SerializeField] private CameraFollow cameraFollow; // Rï¿½fï¿½rence au script CameraFollow
 
-    private Camera mainCamera; // Référence à la caméra principale
-    private float originalCameraSize; // Taille d'origine de la caméra
-    private Coroutine moveCameraCoroutine; // Référence à la coroutine de mouvement de la caméra
+    private Camera mainCamera; // Rï¿½fï¿½rence ï¿½ la camï¿½ra principale
+    private float originalCameraSize; // Taille d'origine de la camï¿½ra
+    private Coroutine moveCameraCoroutine; // Rï¿½fï¿½rence ï¿½ la coroutine de mouvement de la camï¿½ra
 
     private void Start()
     {
@@ -23,10 +23,10 @@ public class CameraTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            cameraFollow.SetFollowing(false); // Désactive le suivi de la caméra
+            cameraFollow.SetFollowing(false); // Dï¿½sactive le suivi de la camï¿½ra
             if (moveCameraCoroutine != null)
             {
-                StopCoroutine(moveCameraCoroutine); // Stoppe la coroutine si elle est déjà en cours
+                StopCoroutine(moveCameraCoroutine); // Stoppe la coroutine si elle est dï¿½jï¿½ en cours
             }
             moveCameraCoroutine = StartCoroutine(MoveCamera());
         }
@@ -34,6 +34,8 @@ public class CameraTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // VÃ©rifier si le GameObject est actif
+   
         if (collision.CompareTag("Player"))
         {
             if (moveCameraCoroutine != null)
@@ -41,7 +43,7 @@ public class CameraTrigger : MonoBehaviour
                 StopCoroutine(moveCameraCoroutine); // Stoppe la coroutine si elle est en cours
             }
             moveCameraCoroutine = StartCoroutine(MoveCameraBack());
-            cameraFollow.SetFollowing(true); // Réactive le suivi de la caméra
+            cameraFollow.SetFollowing(true); // Rï¿½active le suivi de la camï¿½ra
         }
     }
 
@@ -50,31 +52,31 @@ public class CameraTrigger : MonoBehaviour
         Vector3 originalPosition = mainCamera.transform.position;
         Vector3 newPosition = new Vector3(newCameraPosition.x, newCameraPosition.y, -10);
 
-        // Utiliser la taille actuelle de la caméra comme point de départ
+        // Utiliser la taille actuelle de la camï¿½ra comme point de dï¿½part
         float startSize = mainCamera.orthographicSize;
 
         float elapsedTime = 0f;
 
         while (elapsedTime < transitionTime)
         {
-            // Déplace la caméra
+            // Dï¿½place la camï¿½ra
             mainCamera.transform.position = Vector3.Lerp(originalPosition, newPosition, (elapsedTime / transitionTime));
 
-            // Zoom sur la nouvelle taille de la caméra
+            // Zoom sur la nouvelle taille de la camï¿½ra
             mainCamera.orthographicSize = Mathf.Lerp(startSize, newCameraSize, (elapsedTime / transitionTime));
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Assurez-vous que la caméra est à la nouvelle position et taille
+        // Assurez-vous que la camï¿½ra est ï¿½ la nouvelle position et taille
         mainCamera.transform.position = newPosition;
         mainCamera.orthographicSize = newCameraSize;
     }
 
     private IEnumerator MoveCameraBack()
     {
-        // Utiliser la taille actuelle de la caméra comme point de départ
+        // Utiliser la taille actuelle de la camï¿½ra comme point de dï¿½part
         float startSize = mainCamera.orthographicSize;
 
         float elapsedTime = 0f;
@@ -88,7 +90,7 @@ public class CameraTrigger : MonoBehaviour
             yield return null;
         }
 
-        // Assurez-vous que la taille de la caméra est bien rétablie
+        // Assurez-vous que la taille de la camï¿½ra est bien rï¿½tablie
         mainCamera.orthographicSize = originalCameraSize;
     }
 }
