@@ -501,9 +501,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8185518129469670292}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Jump
+      - m_Target: {fileID: 8185518129469670291}
+        m_TargetAssemblyTypeName: GrabController, Assembly-CSharp
+        m_MethodName: GrabAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
