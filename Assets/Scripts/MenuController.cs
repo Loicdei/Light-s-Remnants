@@ -50,14 +50,26 @@ public class MenuController : MonoBehaviour
 
     private void OpenOnePanel(PanelType _type)
     {
-        foreach (var _panel in panelsList) _panel.ChangeState(false);
+        foreach (var _panel in panelsList)
+            _panel.ChangeState(false); // Ferme tous les panels et désactive leurs boutons
 
-        if (_type != PanelType.None) panelsDict[_type].ChangeState(true);
+        if (_type != PanelType.None)
+        {
+            panelsDict[_type].ChangeState(true); // Ouvre le panel et active ses boutons
+
+            // Sélectionner le premier bouton du panel actif
+            if (panelsDict[_type].firstButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(null); // Réinitialise la sélection
+                EventSystem.current.SetSelectedGameObject(panelsDict[_type].firstButton);
+            }
+        }
     }
 
     public void OpenPanel(PanelType _type)
     {
         OpenOnePanel(_type);
+
     }
     public void StartSceneChange()
     {
@@ -101,5 +113,4 @@ public class MenuController : MonoBehaviour
     //    if (_rightPanel != null) inputs.SetShoulderListener(MenuInput.Side.Right, _rightPanel.onClick.Invoke, _rightPanel.Select);
     //    if (_leftPanel != null) inputs.SetShoulderListener(MenuInput.Side.Left, _leftPanel.onClick.Invoke, _leftPanel.Select);
     //}
-
 }
