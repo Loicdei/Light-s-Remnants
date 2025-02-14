@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Animator animatorLantern;
     private GrabController grabController;
     [SerializeField] private Joystick joystick;
+    [SerializeField] private RectTransform joystickBG;
     [SerializeField] private Button jumpButton;
     [SerializeField] private Button lanternButton;
 
@@ -39,24 +41,37 @@ public class PlayerController : MonoBehaviour
         animatorLantern = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
         grabController = GetComponent<GrabController>();
 
-#if UNITY_ANDROID || UNITY_IOS
-                joystick.gameObject.SetActive(true); // Active le joystick sur mobile
-                jumpButton.gameObject.SetActive(true); // Active le bouton de saut
-#else
-        joystick.gameObject.SetActive(false); // Cache le joystick sur PC
-        jumpButton.gameObject.SetActive(false); // Cache les boutons tactiles
-#endif
-        joystick.gameObject.SetActive(true); // Active le joystick sur mobile
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            joystick.gameObject.SetActive(true);
+            joystickBG.gameObject.SetActive(true);
+            jumpButton.gameObject.SetActive(true);
+            lanternButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            joystick.gameObject.SetActive(false);
+            joystickBG.gameObject.SetActive(false);
+            jumpButton.gameObject.SetActive(false);
+            lanternButton.gameObject.SetActive(false);
+        }
+        joystick.gameObject.SetActive(true);
+        joystickBG.gameObject.SetActive(true);
+        jumpButton.gameObject.SetActive(true);
+        lanternButton.gameObject.SetActive(true);
     }
     void Update()
     {
         if (Time.timeScale == 0f || isPaused) return;
-
-#if UNITY_ANDROID || UNITY_IOS
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
+        }
+        else
+        {
+            xInput += Input.GetAxisRaw("Horizontal");
+        }
         xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
-#else
-        xInput = Input.GetAxisRaw("Horizontal"); // PC : Utiliser le clavier
-#endif
 
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
