@@ -39,29 +39,25 @@ public class PlayerController : MonoBehaviour
         animatorLantern = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
         grabController = GetComponent<GrabController>();
 
-        #if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS
                 joystick.gameObject.SetActive(true); // Active le joystick sur mobile
                 jumpButton.gameObject.SetActive(true); // Active le bouton de saut
-        #else
-                joystick.gameObject.SetActive(false); // Cache le joystick sur PC
-                jumpButton.gameObject.SetActive(false); // Cache les boutons tactiles
-        #endif
+#else
+        joystick.gameObject.SetActive(false); // Cache le joystick sur PC
+        jumpButton.gameObject.SetActive(false); // Cache les boutons tactiles
+#endif
         joystick.gameObject.SetActive(true); // Active le joystick sur mobile
     }
     void Update()
     {
-        if (Time.timeScale == 0f) return;
-        if (isPaused)
-        {
-            return;
-        }
+        if (Time.timeScale == 0f || isPaused) return;
 
-        #if UNITY_ANDROID || UNITY_IOS
-                xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
-        #else 
-                xInput = Input.GetAxisRaw("Horizontal"); // PC : Utiliser le clavier
-        #endif
-            
+#if UNITY_ANDROID || UNITY_IOS
+        xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
+#else
+        xInput = Input.GetAxisRaw("Horizontal"); // PC : Utiliser le clavier
+#endif
+
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
         if (isGrounded)
@@ -181,8 +177,13 @@ public class PlayerController : MonoBehaviour
             if (grabController.isHoldingLantern()) animatorLantern.SetBool("IsJumping", true);
         }
     }
-    public void UseLantern()
+    public void StopJump() // Fonction appelée lorsque le bouton est relâché
     {
-        // Fonction pour attraper/lancer
+        if (isJumping && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+        }
+        isJumping = false;
     }
+
 }
