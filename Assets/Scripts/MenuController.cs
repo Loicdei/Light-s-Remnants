@@ -39,7 +39,7 @@ public class MenuController : MonoBehaviour
         foreach (var _panel in panelsList)
         {
             if (_panel) panelsDict.Add(_panel.GetPanelType(), _panel);
-            _panel.init(this);
+            _panel.Init(this);
         }
 
         //Ouvre par d�faut le Main panel
