@@ -28,12 +28,22 @@ public class MenuController : MonoBehaviour
     private Animator fadeSystem;
 
     private Button[] buttons;
+    private Button BtnContinue;
 
     private void Start()
     {
+        
+
         manager = GameManager.instance;
         inputs = GetComponent<MenuInput>();
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+
+        string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
+
+        if (savedScene == "MenuJouable" && BtnContinue != null)
+        {
+            BtnContinue.interactable = false;
+        }
 
         //Permet l'ajout de panels dans la liste
         foreach (var _panel in panelsList)
@@ -50,6 +60,7 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         buttons = FindObjectsOfType<Button>();
+        BtnContinue = GameObject.FindGameObjectWithTag("BtnContinue").GetComponent<Button>();
     }
 
     private void OpenOnePanel(PanelType _type)

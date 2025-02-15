@@ -12,6 +12,8 @@ TagManager:
   - Obstacle
   - LanternLight
   - SaveManager
+  - BtnContinue
+  - BtnStart
   layers:
   - Default
   - TransparentFX

@@ -4809,7 +4809,7 @@ GameObject:
   - component: {fileID: 1384604823}
   m_Layer: 5
   m_Name: BtnContinue
-  m_TagString: Untagged
+  m_TagString: BtnContinue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5602,7 +5602,7 @@ GameObject:
   - component: {fileID: 1706490296}
   m_Layer: 5
   m_Name: BtnStart
-  m_TagString: Untagged
+  m_TagString: BtnStart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
