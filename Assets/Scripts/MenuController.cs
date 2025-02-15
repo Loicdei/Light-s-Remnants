@@ -52,7 +52,7 @@ public class MenuController : MonoBehaviour
             _panel.init(this);
         }
 
-        //Ouvre par d�faut le Main panel
+        //Ouvre par défaut le Main panel
         OpenOnePanel(PanelType.Main);
         
         Debug.Log("PlayerPrefs.GetString MENU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
