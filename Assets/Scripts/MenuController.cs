@@ -27,11 +27,21 @@ public class MenuController : MonoBehaviour
     private Animator fadeSystem;
 
     private Button[] buttons;
+    private Button BtnContinue;
 
     private void Start()
     {
+        
+
         manager = GameManager.instance;
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
+
+        string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
+
+        if (savedScene == "MenuJouable" && BtnContinue != null)
+        {
+            BtnContinue.interactable = false;
+        }
 
         //Permet l'ajout de panels dans la liste
         foreach (var _panel in panelsList)
@@ -40,12 +50,15 @@ public class MenuController : MonoBehaviour
             _panel.Init(this);
         }
 
-        //Ouvre par d�faut le Main panel
+        //Ouvre par défaut le Main panel
         OpenOnePanel(PanelType.Main);
+        
+        Debug.Log("PlayerPrefs.GetString MENU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
     }
     private void Awake()
     {
         buttons = FindObjectsOfType<Button>();
+        BtnContinue = GameObject.FindGameObjectWithTag("BtnContinue").GetComponent<Button>();
     }
 
     private void OpenOnePanel(PanelType _type)
@@ -86,6 +99,8 @@ public class MenuController : MonoBehaviour
 
     public IEnumerator SceneChangeCoroutine()
     {
+        PlayerPrefs.DeleteKey("LastLevel"); // Supprimer la scène sauvegardée
+
         // Désactiver tous les boutons
         SetButtonsInteractable(false);
 
@@ -100,6 +115,36 @@ public class MenuController : MonoBehaviour
         manager.ChangeScene("MenuJouable");
         SetButtonsInteractable(true);
     }
+
+     public void StartSceneChangeContinue()
+    {
+        StartCoroutine(SceneChangeCoroutineContinue());
+    }
+
+    public IEnumerator SceneChangeCoroutineContinue()
+    {
+
+        // Lire le nom de la scène sauvegardée
+        string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
+        Debug.Log("PlayerPrefs.GetString MENU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
+        
+
+        // Désactiver tous les boutons
+        SetButtonsInteractable(false);
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "MenuStatic")
+        {
+            Time.timeScale = 0;
+            fadeSystem.SetTrigger("FadeIn");
+            yield return new WaitForSecondsRealtime(1f);
+            Time.timeScale = 1;
+        }
+        SceneManager.LoadSceneAsync(savedScene);
+        SetButtonsInteractable(true);
+    }
+
+
 
     public void Quit()
     {

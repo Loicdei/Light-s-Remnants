@@ -5550,6 +5550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelStart
       objectReference: {fileID: 0}
+    - target: {fileID: 398267429013013868, guid: acc610272e3e44f48958f1e288647ec5, type: 3}
+      propertyPath: m_TagString
+      value: SaveManager
+      objectReference: {fileID: 0}
     - target: {fileID: 1514608784689178396, guid: acc610272e3e44f48958f1e288647ec5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
