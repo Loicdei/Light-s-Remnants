@@ -29,6 +29,8 @@ public class MenuController : MonoBehaviour
 
     private bool shouldContinueBeActive = false; // Permet de contrôler l'état réel du bouton Continue
 
+    private PanelType currentPanelType = PanelType.None;
+
     private void Awake()
     {
         buttons = FindObjectsOfType<Button>();
@@ -77,6 +79,9 @@ public class MenuController : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(panelsDict[_type].firstButton);
             }
+
+            // Mise à jour du currentPanelType
+            currentPanelType = _type;
         }
     }
 
@@ -93,10 +98,9 @@ public class MenuController : MonoBehaviour
         }
     }
 
-
-    public void StartSceneChange()
+    public PanelType GetCurrentPanelType()
     {
-        StartCoroutine(SceneChangeCoroutine());
+        return currentPanelType; // Retourne le type du panel actuel
     }
 
     private void SetButtonsInteractable(bool interactable)

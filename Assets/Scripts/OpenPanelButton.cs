@@ -17,15 +17,12 @@ public class OpenPanelButton : MonoBehaviour
     }
     private void Update()
     {
-        if (type != PanelType.Main && Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.Escape))
         {
-            controller.OpenPanel(PanelType.Main);
-
-            // Vérifier si un bouton est déjà sélectionné pour éviter la réinitialisation
-            if (EventSystem.current.currentSelectedGameObject == null)
+            if(controller.GetCurrentPanelType() != PanelType.Main)
             {
-                EventSystem.current.SetSelectedGameObject(null); // Ne change pas la sélection
-            }
+                controller.OpenPanel(PanelType.Main);
+            } 
         }
     }
 
@@ -41,7 +38,7 @@ public class OpenPanelButton : MonoBehaviour
 
     public void OpenMainPanel()
     {
-        controller.OpenPanel(PanelType.Main);
+            controller.OpenPanel(PanelType.Main);
     }
 
 }
