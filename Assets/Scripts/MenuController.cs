@@ -37,11 +37,6 @@ public class MenuController : MonoBehaviour
         if (btnObject != null)
         {
             BtnContinue = btnObject.GetComponent<Button>();
-            Debug.Log("Bouton Continue trouvé !");
-        }
-        else
-        {
-            Debug.LogError("Le bouton Continue n'a pas été trouvé ! Vérifiez le tag.");
         }
     }
 
@@ -51,7 +46,6 @@ public class MenuController : MonoBehaviour
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
 
         string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
-        Debug.Log("Valeur LastLevel dans PlayerPrefs au démarrage : " + savedScene);
 
         // Détermine si le bouton doit être actif
         shouldContinueBeActive = (savedScene != "MenuJouable");
@@ -113,11 +107,6 @@ public class MenuController : MonoBehaviour
         if (BtnContinue != null)
         {
             BtnContinue.interactable = interactable;
-            Debug.Log("Bouton Continue " + (interactable ? "activé !" : "désactivé !"));
-        }
-        else
-        {
-            Debug.LogError("Impossible de modifier l'interactivité du bouton Continue car il est null !");
         }
     }
 
@@ -148,7 +137,6 @@ public class MenuController : MonoBehaviour
     public IEnumerator SceneChangeCoroutineContinue()
     {
         string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
-        Debug.Log("Valeur LastLevel avant chargement : " + savedScene);
 
         SetButtonsInteractable(false);
         SetContinueButtonInteractable(false);
