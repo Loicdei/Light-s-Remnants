@@ -126,6 +126,7 @@ public class MenuController : MonoBehaviour
         PlayerPrefs.DeleteKey("LastLevel");
 
         SetButtonsInteractable(false);
+        SetContinueButtonInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == "MenuStaticNew")
@@ -150,6 +151,7 @@ public class MenuController : MonoBehaviour
         Debug.Log("Valeur LastLevel avant chargement : " + savedScene);
 
         SetButtonsInteractable(false);
+        SetContinueButtonInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == "MenuStaticNew")
