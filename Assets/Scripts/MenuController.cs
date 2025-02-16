@@ -133,7 +133,7 @@ public class MenuController : MonoBehaviour
         SetButtonsInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "MenuStatic")
+        if (currentSceneName == "MenuStaticNew")
         {
             Time.timeScale = 0;
             fadeSystem.SetTrigger("FadeIn");
