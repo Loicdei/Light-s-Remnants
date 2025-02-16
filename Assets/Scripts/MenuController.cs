@@ -83,7 +83,16 @@ public class MenuController : MonoBehaviour
     public void OpenPanel(PanelType _type)
     {
         OpenOnePanel(_type);
+
+        if (_type == PanelType.Main)
+        {
+            // Vérifier l'état de `LastLevel` pour ajuster le bouton Continue
+            string savedScene = PlayerPrefs.GetString("LastLevel", "MenuJouable");
+            bool shouldContinueBeActive = (savedScene != "MenuJouable");
+            SetContinueButtonInteractable(shouldContinueBeActive);
+        }
     }
+
 
     public void StartSceneChange()
     {
