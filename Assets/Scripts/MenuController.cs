@@ -103,6 +103,11 @@ public class MenuController : MonoBehaviour
         return currentPanelType; // Retourne le type du panel actuel
     }
 
+    public void StartSceneChange()
+    {
+        StartCoroutine(SceneChangeCoroutine());
+    }
+
     private void SetButtonsInteractable(bool interactable)
     {
         foreach (var button in buttons)
