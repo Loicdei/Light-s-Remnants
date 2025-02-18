@@ -17,7 +17,7 @@ public class OpenPanelButton : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Submit"))
         {
             if(controller.GetCurrentPanelType() != PanelType.Main)
             {
