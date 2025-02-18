@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class PlayerDifficulty : MonoBehaviour
 {
-    public enum Difficulty
-    {
-        Facile,
-        Moyen,
-        Difficile,
-        Veteran
-    }
-
     public Difficulty currentDifficulty;
 
     void Awake()
@@ -22,7 +14,7 @@ public class PlayerDifficulty : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

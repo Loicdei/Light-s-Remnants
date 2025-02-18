@@ -9,13 +9,13 @@ public class SpikeManager : MonoBehaviour
 
     void Start()
     {
-        playerDifficulty = GetComponent<PlayerDifficulty>();
+        playerDifficulty = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDifficulty>();
         obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         AdjustObstacles();
     }
     void Update()
     {
-        currentDifficulty = PlayerDifficulty.currentDifficulty;
+        currentDifficulty = playerDifficulty.currentDifficulty;
     }
     private void AdjustObstacles()
     {
@@ -25,7 +25,7 @@ public class SpikeManager : MonoBehaviour
 
             if (currentObstacle != null)
             {
-                ObstacleDifficulty.Difficulty spikeDifficulty = currentObstacle.GetSpikeDifficulty();
+                Difficulty spikeDifficulty = currentObstacle.GetSpikeDifficulty();
 
                 if (ObstacleHarderThanPlayer(spikeDifficulty))
                 {
@@ -39,7 +39,7 @@ public class SpikeManager : MonoBehaviour
         }
     }
 
-    private bool ObstacleHarderThanPlayer(ObstacleDifficulty.Difficulty spikeDifficulty)
+    private bool ObstacleHarderThanPlayer(Difficulty spikeDifficulty)
     {
         return spikeDifficulty > currentDifficulty;
     }

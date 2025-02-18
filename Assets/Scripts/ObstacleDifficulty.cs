@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class ObstacleDifficulty : MonoBehaviour
 {
-    public enum Difficulty
-    {
-        Facile,
-        Moyen,
-        Difficile,
-        Veteran
-    }
-
     [SerializeField]
     private Difficulty spikeDifficulty;
 
@@ -19,6 +11,7 @@ public class ObstacleDifficulty : MonoBehaviour
     {
         return spikeDifficulty;
     }
+
 }
 
 
