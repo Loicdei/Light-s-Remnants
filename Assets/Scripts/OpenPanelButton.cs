@@ -17,7 +17,7 @@ public class OpenPanelButton : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             if(controller.GetCurrentPanelType() != PanelType.Main)
             {
