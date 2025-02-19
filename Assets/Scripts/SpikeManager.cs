@@ -18,7 +18,7 @@ public class SpikeManager : MonoBehaviour
     private void AdjustObstacles()
     {
         obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-        currentDifficulty = playerDifficulty.currentDifficulty;
+        currentDifficulty = playerDifficulty.GetPlayerDifficulty();
 
         foreach (GameObject obstacle in obstacles)
         {

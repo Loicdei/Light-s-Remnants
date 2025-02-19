@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class PlayerDifficulty : MonoBehaviour
 {
-    public Difficulty currentDifficulty;
+    [SerializeField]
+    private Difficulty playerDifficulty;
 
-    void Awake()
+    public Difficulty GetPlayerDifficulty()
     {
-        DontDestroyOnLoad(gameObject);
+        return playerDifficulty;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetPlayerDifficulty(Difficulty difficulty)
     {
-
+        playerDifficulty = difficulty;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void CalculateDifficulty()
-    {
-        
-    }
 }
+
+
