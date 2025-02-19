@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 657645374}
   - component: {fileID: 657645373}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ObstacleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8910b79124ad474793e11b9e35d7bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDifficulty: {fileID: 0}
   currentDifficulty: 0
 --- !u!4 &657645374
 Transform:
@@ -3493,7 +3492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15bca22cf910ce41af1701f60893139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDifficulty: 2
+  spikeDifficulty: 3
 --- !u!1 &2060113359
 GameObject:
   m_ObjectHideFlags: 0

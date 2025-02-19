@@ -4,21 +4,22 @@ using static PlayerDifficulty;
 public class SpikeManager : MonoBehaviour
 {
     private GameObject[] obstacles; 
-    public PlayerDifficulty playerDifficulty;
+    private PlayerDifficulty playerDifficulty;
     public Difficulty currentDifficulty;
 
     void Start()
     {
         playerDifficulty = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDifficulty>();
-        obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         AdjustObstacles();
     }
     void Update()
     {
-        currentDifficulty = playerDifficulty.currentDifficulty;
     }
     private void AdjustObstacles()
     {
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        currentDifficulty = playerDifficulty.currentDifficulty;
+
         foreach (GameObject obstacle in obstacles)
         {
             ObstacleDifficulty currentObstacle = obstacle.GetComponent<ObstacleDifficulty>();
@@ -27,7 +28,7 @@ public class SpikeManager : MonoBehaviour
             {
                 Difficulty spikeDifficulty = currentObstacle.GetSpikeDifficulty();
 
-                if (ObstacleHarderThanPlayer(spikeDifficulty))
+                if (spikeDifficulty > currentDifficulty)
                 {
                     obstacle.SetActive(false);
                 }
@@ -39,8 +40,4 @@ public class SpikeManager : MonoBehaviour
         }
     }
 
-    private bool ObstacleHarderThanPlayer(Difficulty spikeDifficulty)
-    {
-        return spikeDifficulty > currentDifficulty;
-    }
 }
