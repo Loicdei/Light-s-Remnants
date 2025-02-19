@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1699096184255214187, guid: b20b3080e064f5f4aba4a695dfbbab23, type: 3}
+      propertyPath: targetTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1942244017328582963, guid: b20b3080e064f5f4aba4a695dfbbab23, type: 3}
       propertyPath: m_Name
       value: ObstacleManager
