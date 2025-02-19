@@ -5,7 +5,7 @@ public class SpikeManager : MonoBehaviour
 {
     private GameObject[] obstacles; 
     private PlayerDifficulty playerDifficulty;
-    public Difficulty currentDifficulty;
+    private Difficulty currentDifficulty;
 
     void Start()
     {
