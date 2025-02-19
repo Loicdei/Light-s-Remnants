@@ -11,6 +11,8 @@ TagManager:
   - FadeSystem
   - Obstacle
   - LanternLight
+  - ObstacleManager
+  - PlayerDifficultySave
   layers:
   - Default
   - TransparentFX

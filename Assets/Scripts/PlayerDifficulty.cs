@@ -7,6 +7,11 @@ public class PlayerDifficulty : MonoBehaviour
     [SerializeField]
     private Difficulty playerDifficulty;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public Difficulty GetPlayerDifficulty()
     {
         return playerDifficulty;

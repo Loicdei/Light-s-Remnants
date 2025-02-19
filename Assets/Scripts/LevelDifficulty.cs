@@ -19,7 +19,7 @@ public class LevelDifficulty : MonoBehaviour
 
     void Start()
     {
-        playerDifficulty = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDifficulty>();
+        playerDifficulty = GameObject.FindGameObjectWithTag("PlayerDifficultySave").GetComponent<PlayerDifficulty>();
         startTime = Time.time;
     }
 
