@@ -7,6 +7,8 @@ public class Door : MonoBehaviour
     [SerializeField] Sprite SpriteDoorLocked;
     [SerializeField] Sprite SpriteDoorClosed;
     [SerializeField] private string scene;
+    [SerializeField] private Joystick joystick;
+
     private Animator fadeSystem;
 
     private bool playerInRange = false;
@@ -33,9 +35,9 @@ public class Door : MonoBehaviour
         spriteRenderer.sprite = SpriteDoorClosed;
     }
     void Update()
-    {
+    {//Input.GetAxis("Vertical") > .5f
         if (Time.timeScale == 0f) return;
-        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+        if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
             StartCoroutine(OpenDoor());
     }
 
