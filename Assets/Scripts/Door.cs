@@ -83,20 +83,25 @@ public class Door : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
 
-        // Ajoute la porte au dictionnaire pour qu'elle reste ouverte
+        // Met à jour le dernier niveau avant de charger la nouvelle scène
+        PlayerPrefs.SetString("LastLevel", scene);
+
+        // Sauvegarde les portes déverrouillées
         string unlockedDoorsString = PlayerPrefs.GetString(UnlockedDoorsKey, "");
         List<string> unlockedDoors = new List<string>(unlockedDoorsString.Split(','));
 
-        // Ajoute la porte à la liste des portes déverrouillées
+        // Ajoute la porte à la liste des portes déverrouillées si ce n'est pas déjà fait
         if (!unlockedDoors.Contains(scene))
         {
             unlockedDoors.Add(scene);
             PlayerPrefs.SetString(UnlockedDoorsKey, string.Join(",", unlockedDoors));
-            PlayerPrefs.Save();
+            PlayerPrefs.Save(); // Sauvegarde immédiatement
         }
 
+        // Charge la scène suivante
         SceneManager.LoadSceneAsync(scene);
         yield return new WaitForSecondsRealtime(1f);
+
         playerRb.simulated = true;
         if (playerController != null)
         {
