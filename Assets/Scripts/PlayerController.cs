@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RectTransform joystickBG;
     [SerializeField] private Button jumpButton;
     [SerializeField] private Button lanternButton;
+    [SerializeField] private Button pauseButton;
 
     private float xInput;
     private bool isGrounded;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
             joystickBG.gameObject.SetActive(true);
             jumpButton.gameObject.SetActive(true);
             lanternButton.gameObject.SetActive(true);
+            pauseButton.gameObject.SetActive(true);
         }
         else
         {
@@ -54,11 +56,9 @@ public class PlayerController : MonoBehaviour
             joystickBG.gameObject.SetActive(false);
             jumpButton.gameObject.SetActive(false);
             lanternButton.gameObject.SetActive(false);
+            pauseButton.gameObject.SetActive(false);
         }
-        joystick.gameObject.SetActive(true);
-        joystickBG.gameObject.SetActive(true);
-        jumpButton.gameObject.SetActive(true);
-        lanternButton.gameObject.SetActive(true);
+
     }
     void Update()
     {
@@ -69,9 +69,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            xInput += Input.GetAxisRaw("Horizontal");
+            xInput = Input.GetAxisRaw("Horizontal");
         }
-        xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
+
+        joystick.gameObject.SetActive(true);
+        joystickBG.gameObject.SetActive(true);
+        jumpButton.gameObject.SetActive(true);
+        lanternButton.gameObject.SetActive(true);
+        pauseButton.gameObject.SetActive(true);
+        xInput = joystick.Horizontal();
+
+
 
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
