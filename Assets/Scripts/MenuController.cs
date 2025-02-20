@@ -136,7 +136,7 @@ public class MenuController : MonoBehaviour
         SetContinueButtonInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "MenuStaticNew")
+        if (currentSceneName == "MenuStatic")
         {
             Time.timeScale = 0;
             fadeSystem.SetTrigger("FadeIn");
@@ -160,14 +160,14 @@ public class MenuController : MonoBehaviour
         SetContinueButtonInteractable(false);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "MenuStaticNew")
+        if (currentSceneName == "MenuStatic")
         {
             Time.timeScale = 0;
             fadeSystem.SetTrigger("FadeIn");
             yield return new WaitForSecondsRealtime(1f);
             Time.timeScale = 1;
         }
-        SceneManager.LoadSceneAsync(savedScene);
+        SceneManager.LoadSceneAsync("MenuJouable");
         SetButtonsInteractable(true);
     }
 

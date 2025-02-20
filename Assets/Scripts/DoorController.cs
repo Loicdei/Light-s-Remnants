@@ -6,11 +6,12 @@ public class DoorController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer closeLock;
     [SerializeField] private string targetScene;
-    [SerializeField] private Joystick joystick;
     public static DoorController instance;  // Singleton pour un acc�s global
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la sc�ne
     private bool playerInRange = false;
     private bool isDoorUnlocked = false;
+    [SerializeField] private Joystick joystick;
+
     private Animator doorAnimator; // R�f�rence � l'Animator de la porte
     private Animator fadeSystem;
     private CameraFollow cameraFollow;
@@ -51,7 +52,6 @@ public class DoorController : MonoBehaviour
             if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
             {
                 StartCoroutine(TransitionLevel());
-                // TODO : Unlock next level
             }
         }
     }
@@ -113,9 +113,9 @@ public class DoorController : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(targetScene);
 
-        PlayerPrefs.SetString("LastLevel", targetScene); 
-        PlayerPrefs.Save(); 
-        
+        PlayerPrefs.SetString("LastLevel", targetScene);
+        PlayerPrefs.Save();
+
         Debug.Log("targetScene :" + targetScene);
         Debug.Log("PlayerPrefs.GetString JEU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
         yield return new WaitForSecondsRealtime(1f);
