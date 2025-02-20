@@ -380,7 +380,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Seventh
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &211162599
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Fourth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &438687128
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -878,7 +878,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Final
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &534850032
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Fifth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &577744650
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Eleventh
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &697478697
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Ninth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &802344990
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Third
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &874656417
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1834,7 +1834,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Tenth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &1068123323
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16665,7 +16665,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Second
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!61 &1584127774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17173,7 +17173,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Sixth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &1873815716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17378,7 +17378,7 @@ MonoBehaviour:
   SpriteDoorLocked: {fileID: 21300000, guid: d3ed3faccee156844a798fd9c57e700c, type: 3}
   SpriteDoorClosed: {fileID: 21300000, guid: 8a2d81fb48090cd4da1d43f3b2298d4c, type: 3}
   scene: Eighth
-  isDoorUnlocked: 1
+  isDoorUnlocked: 0
 --- !u!212 &1894760051
 SpriteRenderer:
   m_ObjectHideFlags: 0
