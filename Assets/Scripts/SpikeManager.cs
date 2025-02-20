@@ -1,24 +1,24 @@
 using UnityEngine;
-using static PlayerDifficulty;
 
 public class SpikeManager : MonoBehaviour
 {
-    private GameObject[] obstacles; 
-    private PlayerDifficulty playerDifficulty;
+    private GameObject[] obstacles;
     private Difficulty currentDifficulty;
 
     void Start()
     {
-        playerDifficulty = GameObject.FindGameObjectWithTag("PlayerDifficultySave").GetComponent<PlayerDifficulty>();
+        if (!PlayerPrefs.HasKey("SavedDifficulty"))
+        {
+            DifficultyManager.SetDifficulty(Difficulty.Moyen); // Définit la difficulté par défaut
+            Debug.Log("Difficulté initialisée à Moyen.");
+        }
         AdjustObstacles();
     }
-    void Update()
-    {
-    }
+
     private void AdjustObstacles()
     {
         obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-        currentDifficulty = playerDifficulty.GetPlayerDifficulty();
+        currentDifficulty = DifficultyManager.GetDifficulty();
 
         foreach (GameObject obstacle in obstacles)
         {
@@ -39,5 +39,4 @@ public class SpikeManager : MonoBehaviour
             }
         }
     }
-
 }

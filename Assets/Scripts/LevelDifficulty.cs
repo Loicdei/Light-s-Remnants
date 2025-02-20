@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static PlayerDifficulty;
 
 public class LevelDifficulty : MonoBehaviour
 {
@@ -12,14 +8,10 @@ public class LevelDifficulty : MonoBehaviour
     private float targetTime = 60f;
 
     private int deathCount = 0;
-    private float startTime;        // Temps de départ pour calculer le temps passé
-
-    private PlayerDifficulty playerDifficulty;
-    private Difficulty currentDifficulty;
+    private float startTime;
 
     void Start()
     {
-        playerDifficulty = GameObject.FindGameObjectWithTag("PlayerDifficultySave").GetComponent<PlayerDifficulty>();
         startTime = Time.time;
     }
 
@@ -32,34 +24,33 @@ public class LevelDifficulty : MonoBehaviour
     public void CalculateDifficulty()
     {
         float timeSpent = Time.time - startTime;
-
         float deathPercentage = ((float)deathCount / deathThreshold) * 100;
         float timePercentage = (timeSpent / targetTime) * 100;
 
-        currentDifficulty = playerDifficulty.GetPlayerDifficulty();
+        Difficulty newDifficulty;
 
         if (deathPercentage <= 25 && timePercentage <= 25)
         {
-            currentDifficulty = Difficulty.Veteran;
+            newDifficulty = Difficulty.Veteran;
         }
         else if (deathPercentage <= 50 && timePercentage <= 50)
         {
-            currentDifficulty = Difficulty.Difficile;
+            newDifficulty = Difficulty.Difficile;
         }
         else if (deathPercentage <= 75 && timePercentage <= 75)
         {
-            currentDifficulty = Difficulty.Moyen;
+            newDifficulty = Difficulty.Moyen;
         }
         else
         {
-            currentDifficulty = Difficulty.Facile;
+            newDifficulty = Difficulty.Facile;
         }
 
-        playerDifficulty.SetPlayerDifficulty(currentDifficulty);
-
-        ResetDifficulty();
+        DifficultyManager.SetDifficulty(newDifficulty);
+        ResetCounters();
     }
-    private void ResetDifficulty()
+
+    private void ResetCounters()
     {
         deathCount = 0;
         startTime = Time.time;
