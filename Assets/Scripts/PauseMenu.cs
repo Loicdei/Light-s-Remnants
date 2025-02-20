@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -13,14 +14,19 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            SetPause();
+        }
+    }
+
+    public void SetPause()
+    {
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
         }
     }
 
