@@ -75,15 +75,15 @@ public class PlayerController : MonoBehaviour
             xInput = Input.GetAxisRaw("Horizontal");
         }
 
-        /*
-                joystick.gameObject.SetActive(true);
-                joystickBG.gameObject.SetActive(true);
-                jumpButton.gameObject.SetActive(true);
-                lanternButton.gameObject.SetActive(true);
-                pauseButton.gameObject.SetActive(true);
-                beaconButton.gameObject.SetActive(true);
-                xInput = joystick.Horizontal();
-        */
+
+        joystick.gameObject.SetActive(true);
+        joystickBG.gameObject.SetActive(true);
+        jumpButton.gameObject.SetActive(true);
+        lanternButton.gameObject.SetActive(true);
+        pauseButton.gameObject.SetActive(true);
+        beaconButton.gameObject.SetActive(true);
+        xInput = joystick.Horizontal();
+
 
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time

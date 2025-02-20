@@ -6,6 +6,7 @@ public class DoorController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer closeLock;
     [SerializeField] private string targetScene;
+    [SerializeField] private Joystick joystick;
     public static DoorController instance;  // Singleton pour un acc�s global
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la sc�ne
     private bool playerInRange = false;
@@ -47,7 +48,7 @@ public class DoorController : MonoBehaviour
             doorAnimator.SetBool("isOpen", playerInRange);
 
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
-            if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f))
+            if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
             {
                 StartCoroutine(TransitionLevel());
                 // TODO : Unlock next level
