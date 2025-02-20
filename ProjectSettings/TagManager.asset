@@ -11,6 +11,9 @@ TagManager:
   - FadeSystem
   - Obstacle
   - LanternLight
+  - SaveManager
+  - BtnContinue
+  - BtnStart
   layers:
   - Default
   - TransparentFX

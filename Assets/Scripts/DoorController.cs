@@ -112,6 +112,12 @@ public class DoorController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(targetScene);
+
+        PlayerPrefs.SetString("LastLevel", targetScene); 
+        PlayerPrefs.Save(); 
+        
+        Debug.Log("targetScene :" + targetScene);
+        Debug.Log("PlayerPrefs.GetString JEU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)

@@ -9,7 +9,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuCanvas;
     public GameObject firstButton;
     private bool isPaused = false;
-    private Button selectedButton;
 
     void Update()
     {
@@ -17,8 +16,6 @@ public class PauseMenu : MonoBehaviour
         {
             SetPause();
         }
-
-        selectedButton = EventSystem.current.currentSelectedGameObject?.GetComponent<Button>();
     }
 
     public void SetPause()
