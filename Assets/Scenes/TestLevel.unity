@@ -812,6 +812,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8860eee19031548b72dfab551ae293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &968905210 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9197075387184098006, guid: 83aec62a0aeaf66468c5b6ad4aece629, type: 3}
+  m_PrefabInstance: {fileID: 1707117449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &984843913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1405,6 +1416,10 @@ PrefabInstance:
       propertyPath: pauseButton
       value: 
       objectReference: {fileID: 806923850}
+    - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: beaconButton
+      value: 
+      objectReference: {fileID: 968905210}
     - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: lanternButton
       value: 

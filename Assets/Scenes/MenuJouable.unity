@@ -628,6 +628,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 443747220}
     - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
+      propertyPath: beaconButton
+      value: 
+      objectReference: {fileID: 417474202}
+    - target: {fileID: 3912815804300171526, guid: ab384acbe2df8d24eae2d76cf4ddb2c5, type: 3}
       propertyPath: lanternButton
       value: 
       objectReference: {fileID: 1191653935}
@@ -910,6 +914,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83aec62a0aeaf66468c5b6ad4aece629, type: 3}
+--- !u!114 &417474202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9197075387184098006, guid: 83aec62a0aeaf66468c5b6ad4aece629, type: 3}
+  m_PrefabInstance: {fileID: 417474201}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &438687125
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Button jumpButton;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button pauseButton;
+    [SerializeField] private Button beaconButton;
 
     private float xInput;
     private bool isGrounded;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
             jumpButton.gameObject.SetActive(true);
             lanternButton.gameObject.SetActive(true);
             pauseButton.gameObject.SetActive(true);
+            beaconButton.gameObject.SetActive(true);
         }
         else
         {
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
             jumpButton.gameObject.SetActive(false);
             lanternButton.gameObject.SetActive(false);
             pauseButton.gameObject.SetActive(false);
+            beaconButton.gameObject.SetActive(false);
         }
 
     }
@@ -72,13 +75,14 @@ public class PlayerController : MonoBehaviour
             xInput = Input.GetAxisRaw("Horizontal");
         }
 
+
         joystick.gameObject.SetActive(true);
         joystickBG.gameObject.SetActive(true);
         jumpButton.gameObject.SetActive(true);
         lanternButton.gameObject.SetActive(true);
         pauseButton.gameObject.SetActive(true);
+        beaconButton.gameObject.SetActive(true);
         xInput = joystick.Horizontal();
-
 
 
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
