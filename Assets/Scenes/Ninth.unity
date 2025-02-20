@@ -24431,6 +24431,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2471927630011246089, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 1350872232}
+    - target: {fileID: 2471927630011246089, guid: fd7c1ad4f80868943b546db4cae6cba1, type: 3}
       propertyPath: targetScene
       value: Tenth
       objectReference: {fileID: 0}
@@ -24668,8 +24672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 552762360}
-  minX: 0
-  maxX: 20
+  minX: -5136.1
+  maxX: 1110.7
   minY: 0
   maxY: 100
 --- !u!81 &2050248947

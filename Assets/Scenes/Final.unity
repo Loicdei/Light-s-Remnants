@@ -3732,8 +3732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 238543184}
-  minX: 0
-  maxX: 20
+  minX: -326.61
+  maxX: 1126.6
   minY: 0
   maxY: 100
 --- !u!81 &1863881749
