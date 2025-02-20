@@ -63,7 +63,7 @@ public class Door : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0f) return;
-        if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
+        if (playerInRange && isDoorUnlocked && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
         { 
             StartCoroutine(OpenDoor());
         }
