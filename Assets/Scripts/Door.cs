@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class Door : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Door : MonoBehaviour
     private PlayerController playerController;
     private GrabController grabController;
 
+    // Clé pour les PlayerPrefs (pour sauver les portes déverrouillées)
+    private const string UnlockedDoorsKey = "UnlockedDoors";
+
     private void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -30,19 +34,24 @@ public class Door : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Vérifie si la porte a déjà été déverrouillée
-        if (PlayerPrefs.GetInt("DoorUnlocked_" + scene, 0) == 1)
+        // Vérifie si LastLevel existe
+        string lastLevel = PlayerPrefs.GetString("LastLevel", "");
+
+        if (string.IsNullOrEmpty(lastLevel))
         {
-            isDoorUnlocked = true;
+            // Aucune progression sauvegardée : verrouille tout sauf "First"
+            isDoorUnlocked = (scene == "First");
         }
         else
         {
-            string lastLevel = PlayerPrefs.GetString("LastLevel", "");
-            if (lastLevel == scene)
+            // Récupérer l'état des portes déverrouillées depuis PlayerPrefs
+            string unlockedDoorsString = PlayerPrefs.GetString(UnlockedDoorsKey, "");
+            List<string> unlockedDoors = new List<string>(unlockedDoorsString.Split(','));
+
+            // Si la scène est dans la liste des portes déverrouillées
+            if (unlockedDoors.Contains(scene) || lastLevel == scene)
             {
                 isDoorUnlocked = true;
-                PlayerPrefs.SetInt("DoorUnlocked_" + scene, 1);
-                PlayerPrefs.Save();
             }
         }
 
@@ -63,10 +72,6 @@ public class Door : MonoBehaviour
         if (isTransitioning) yield break;
         isTransitioning = true;
 
-        // Sauvegarde du niveau actuel avant de changer de scène
-        PlayerPrefs.SetString("LastLevel", scene);
-        PlayerPrefs.Save();
-
         if (playerController != null)
         {
             playerController.SetPauseState(true);
@@ -77,6 +82,19 @@ public class Door : MonoBehaviour
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
+
+        // Ajoute la porte au dictionnaire pour qu'elle reste ouverte
+        string unlockedDoorsString = PlayerPrefs.GetString(UnlockedDoorsKey, "");
+        List<string> unlockedDoors = new List<string>(unlockedDoorsString.Split(','));
+
+        // Ajoute la porte à la liste des portes déverrouillées
+        if (!unlockedDoors.Contains(scene))
+        {
+            unlockedDoors.Add(scene);
+            PlayerPrefs.SetString(UnlockedDoorsKey, string.Join(",", unlockedDoors));
+            PlayerPrefs.Save();
+        }
+
         SceneManager.LoadSceneAsync(scene);
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
