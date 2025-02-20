@@ -24,7 +24,7 @@ public class StartDoor : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0f) return;
-        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+        if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f))
         {
             StartCoroutine(TransitionLevel());
         }

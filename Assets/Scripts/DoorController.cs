@@ -47,7 +47,7 @@ public class DoorController : MonoBehaviour
             doorAnimator.SetBool("isOpen", playerInRange);
 
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
-            if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+            if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f))
             {
                 StartCoroutine(TransitionLevel());
                 // TODO : Unlock next level

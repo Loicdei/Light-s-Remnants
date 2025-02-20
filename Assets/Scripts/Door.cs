@@ -33,10 +33,12 @@ public class Door : MonoBehaviour
         spriteRenderer.sprite = SpriteDoorClosed;
     }
     void Update()
-    {
+    {//Input.GetAxis("Vertical") > .5f
         if (Time.timeScale == 0f) return;
-        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+        if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f))
             StartCoroutine(OpenDoor());
+
+
     }
 
     private System.Collections.IEnumerator OpenDoor()
