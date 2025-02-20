@@ -48,6 +48,7 @@ public class GrabController : MonoBehaviour
         intensiteBase = lumiereLanterne.pointLightOuterRadius;
     }
 
+
     void Update()
     {
         if (Time.timeScale == 0f) return;
