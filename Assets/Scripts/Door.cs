@@ -25,24 +25,47 @@ public class Door : MonoBehaviour
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
     }
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = SpriteDoorOpen;
-        spriteRenderer.sprite = SpriteDoorLocked;
-        spriteRenderer.sprite = SpriteDoorClosed;
+
+        // Vérifie si la porte a déjà été déverrouillée
+        if (PlayerPrefs.GetInt("DoorUnlocked_" + scene, 0) == 1)
+        {
+            isDoorUnlocked = true;
+        }
+        else
+        {
+            string lastLevel = PlayerPrefs.GetString("LastLevel", "");
+            if (lastLevel == scene)
+            {
+                isDoorUnlocked = true;
+                PlayerPrefs.SetInt("DoorUnlocked_" + scene, 1);
+                PlayerPrefs.Save();
+            }
+        }
+
+        UpdateDoorSprite();
     }
+
     void Update()
     {
         if (Time.timeScale == 0f) return;
-        if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+        if (playerInRange && isDoorUnlocked && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
+        {
             StartCoroutine(OpenDoor());
+        }
     }
 
     private System.Collections.IEnumerator OpenDoor()
     {
         if (isTransitioning) yield break;
         isTransitioning = true;
+
+        // Sauvegarde du niveau actuel avant de changer de scène
+        PlayerPrefs.SetString("LastLevel", scene);
+        PlayerPrefs.Save();
 
         if (playerController != null)
         {
@@ -66,18 +89,34 @@ public class Door : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && isDoorUnlocked)
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            spriteRenderer.sprite = SpriteDoorOpen;
+            UpdateDoorSprite();
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && isDoorUnlocked)
+        if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            UpdateDoorSprite();
+        }
+    }
+
+    private void UpdateDoorSprite()
+    {
+        if (!isDoorUnlocked)
+        {
+            spriteRenderer.sprite = SpriteDoorLocked;
+        }
+        else if (playerInRange)
+        {
+            spriteRenderer.sprite = SpriteDoorOpen;
+        }
+        else
+        {
             spriteRenderer.sprite = SpriteDoorClosed;
         }
     }
