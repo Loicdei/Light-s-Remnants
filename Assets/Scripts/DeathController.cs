@@ -10,6 +10,7 @@ public class DeathController : MonoBehaviour
     Rigidbody2D playerRb;
     private PlayerController playerController;
     private GrabController grabController;
+    private LevelDifficulty levelDifficulty;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class DeathController : MonoBehaviour
         fadeSystem = GameObject.FindGameObjectWithTag("FadeSystem").GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         grabController = GetComponent<GrabController>();
+        levelDifficulty = GameObject.FindGameObjectWithTag("ObstacleManager").GetComponent<LevelDifficulty>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,6 +75,7 @@ public class DeathController : MonoBehaviour
             playerController.SetPauseState(false);
             grabController.SetPauseState(false);
         }
+        levelDifficulty.IncrementDeathCount();
     }
 
 }

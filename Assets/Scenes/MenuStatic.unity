@@ -3318,7 +3318,7 @@ MonoBehaviour:
   type: 1
   rightPanel: {fileID: 0}
   leftPanel: {fileID: 0}
-  firstButton: {fileID: 1403150455}
+  firstButton: {fileID: 0}
 --- !u!1 &670956581
 GameObject:
   m_ObjectHideFlags: 0
@@ -5434,7 +5434,7 @@ MonoBehaviour:
   type: 3
   rightPanel: {fileID: 0}
   leftPanel: {fileID: 0}
-  firstButton: {fileID: 748024868}
+  firstButton: {fileID: 0}
 --- !u!225 &1542742054
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5843,7 +5843,7 @@ MonoBehaviour:
   type: 2
   rightPanel: {fileID: 0}
   leftPanel: {fileID: 0}
-  firstButton: {fileID: 2022298133}
+  firstButton: {fileID: 0}
 --- !u!114 &1647572624
 MonoBehaviour:
   m_ObjectHideFlags: 0

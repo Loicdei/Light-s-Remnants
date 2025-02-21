@@ -19,6 +19,7 @@ public class DoorController : MonoBehaviour
     Rigidbody2D playerRb;
     private PlayerController playerController;
     private GrabController grabController;
+    private LevelDifficulty levelDifficulty;
 
     void Awake()
     {
@@ -59,6 +60,7 @@ public class DoorController : MonoBehaviour
     void Start()
     {
         beacons = FindObjectsOfType<Beacon>();  // Trouver toutes les balises dans la sc�ne
+        levelDifficulty = GameObject.FindGameObjectWithTag("ObstacleManager").GetComponent<LevelDifficulty>();
     }
 
     // Fonction pour v�rifier si toutes les balises sont allum�es
@@ -110,6 +112,7 @@ public class DoorController : MonoBehaviour
         Time.timeScale = 0;
         fadeSystem.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(1f);
+        levelDifficulty.CalculateDifficulty();
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(targetScene);
 
