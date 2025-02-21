@@ -131,6 +131,8 @@ public class MenuController : MonoBehaviour
     public IEnumerator SceneChangeCoroutine()
     {
         PlayerPrefs.DeleteKey("LastLevel");
+        PlayerPrefs.DeleteKey("UnlockedDoors");
+        PlayerPrefs.Save();
 
         SetButtonsInteractable(false);
         SetContinueButtonInteractable(false);
