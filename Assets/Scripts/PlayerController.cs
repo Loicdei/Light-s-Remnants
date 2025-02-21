@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,12 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent onLandEvent;
     private Animator animatorLantern;
     private GrabController grabController;
-    [SerializeField] private Joystick joystick;
-    [SerializeField] private RectTransform joystickBG;
-    [SerializeField] private Button jumpButton;
-    [SerializeField] private Button lanternButton;
-    [SerializeField] private Button pauseButton;
-    [SerializeField] private Button beaconButton;
 
     private float xInput;
     private bool isGrounded;
@@ -42,50 +34,16 @@ public class PlayerController : MonoBehaviour
     {
         animatorLantern = GameObject.FindGameObjectWithTag("Lanterne").GetComponent<Animator>();
         grabController = GetComponent<GrabController>();
-
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            joystick.gameObject.SetActive(true);
-            joystickBG.gameObject.SetActive(true);
-            jumpButton.gameObject.SetActive(true);
-            lanternButton.gameObject.SetActive(true);
-            pauseButton.gameObject.SetActive(true);
-            beaconButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            joystick.gameObject.SetActive(false);
-            joystickBG.gameObject.SetActive(false);
-            jumpButton.gameObject.SetActive(false);
-            lanternButton.gameObject.SetActive(false);
-            pauseButton.gameObject.SetActive(false);
-            beaconButton.gameObject.SetActive(false);
-        }
-
     }
     void Update()
     {
-        if (Time.timeScale == 0f || isPaused) return;
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        if (Time.timeScale == 0f) return;
+        if (isPaused)
         {
-            xInput = joystick.Horizontal(); // Mobile : Utiliser le joystick
-        }
-        else
-        {
-            xInput = Input.GetAxisRaw("Horizontal");
+            return;
         }
 
-
-        /*
-                joystick.gameObject.SetActive(true);
-                joystickBG.gameObject.SetActive(true);
-                jumpButton.gameObject.SetActive(true);
-                lanternButton.gameObject.SetActive(true);
-                pauseButton.gameObject.SetActive(true);
-                beaconButton.gameObject.SetActive(true);
-                xInput = joystick.Horizontal();
-        */
-
+        xInput = Input.GetAxisRaw("Horizontal");
         isGrounded = groundCheck.IsTouchingLayers(groundLayer);
         //Coyote time
         if (isGrounded)
@@ -195,23 +153,4 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
         }
     }
-    public void Jump() // Cette fonction est appelée par le bouton tactile
-    {
-        if (isGrounded || coyoteTimeCounter > 0)
-        {
-            jumpRequest = true;
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-            if (grabController.isHoldingLantern()) animatorLantern.SetBool("IsJumping", true);
-        }
-    }
-    public void StopJump() // Fonction appelée lorsque le bouton est relâché
-    {
-        if (isJumping && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
-        }
-        isJumping = false;
-    }
-
 }

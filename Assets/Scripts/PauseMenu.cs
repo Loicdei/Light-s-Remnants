@@ -2,32 +2,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuCanvas;
     public GameObject firstButton;
     private bool isPaused = false;
+    private Button selectedButton;
 
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
         {
-            SetPause();
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
-    }
 
-    public void SetPause()
-    {
-        if (isPaused)
-        {
-            ResumeGame();
-        }
-        else
-        {
-            PauseGame();
-        }
+        selectedButton = EventSystem.current.currentSelectedGameObject?.GetComponent<Button>();
     }
 
     public void PauseGame()

@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Tenth.unity
     guid: 2ab2cf67427765f49904012fccc8ed7c
   - enabled: 1
-    path: Assets/Scenes/eleventh.unity
+    path: Assets/Scenes/Eleventh.unity
     guid: 4edb7f47d996b7f4dbfeee41066c5089
   - enabled: 1
     path: Assets/Scenes/Final.unity

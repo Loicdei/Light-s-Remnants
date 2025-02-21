@@ -10,8 +10,6 @@ public class DoorController : MonoBehaviour
     private Beacon[] beacons;  // Tableau contenant toutes les balises dans la sc�ne
     private bool playerInRange = false;
     private bool isDoorUnlocked = false;
-    [SerializeField] private Joystick joystick;
-
     private Animator doorAnimator; // R�f�rence � l'Animator de la porte
     private Animator fadeSystem;
     private CameraFollow cameraFollow;
@@ -50,9 +48,10 @@ public class DoorController : MonoBehaviour
             doorAnimator.SetBool("isOpen", playerInRange);
 
             // Si le joueur est dans la zone et appuie sur une touche, ouvre la porte
-            if (playerInRange && (Input.GetButtonDown("EnterDoor") || Input.GetAxis("Vertical") > .5f || joystick.Vertical() > .5f))
+            if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("Vertical") > .5f))
             {
                 StartCoroutine(TransitionLevel());
+                // TODO : Unlock next level
             }
         }
     }
@@ -115,12 +114,6 @@ public class DoorController : MonoBehaviour
         levelDifficulty.CalculateDifficulty();
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(targetScene);
-
-        PlayerPrefs.SetString("LastLevel", targetScene);
-        PlayerPrefs.Save();
-
-        Debug.Log("targetScene :" + targetScene);
-        Debug.Log("PlayerPrefs.GetString JEU :" + PlayerPrefs.GetString("LastLevel", "MenuJouable"));
         yield return new WaitForSecondsRealtime(1f);
         playerRb.simulated = true;
         if (playerController != null)
