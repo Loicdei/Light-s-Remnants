@@ -1,27 +1,44 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class OpenPanelButton : MonoBehaviour
 {
     [SerializeField] private PanelType type;
 
-    [SerializeField] private OpenPanelButton onSwitchBackAction;
-
     private MenuController controller;
-
-    private MenuInput inputs;
-
-    void Start()
+    private void Start()
     {
-      controller = FindObjectOfType<MenuController>();  
-      inputs = controller.GetComponent<MenuInput>();
+        controller = FindObjectOfType<MenuController>();
+        if (controller == null)
+        {
+            Debug.LogError("MenuController introuvable ! Vérifiez qu'il est bien dans la scène.");
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if(controller.GetCurrentPanelType() != PanelType.Main)
+            {
+                controller.OpenPanel(PanelType.Main);
+            } 
+        }
     }
 
-    public void OnClick()
+    public void OpenpanelOptions()
     {
-        controller.OpenPanel(type);
-        if (onSwitchBackAction != null) inputs.SetBackListener(onSwitchBackAction.OnClick);
-        else inputs.SetBackListener();
+        controller.OpenPanel(PanelType.Options);
+    }
+
+    public void OpenpanelCredits()
+    {
+        controller.OpenPanel(PanelType.Credits);
+    }
+
+    public void OpenMainPanel()
+    {
+            controller.OpenPanel(PanelType.Main);
     }
 
 }
