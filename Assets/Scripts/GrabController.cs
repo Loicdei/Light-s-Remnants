@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +48,7 @@ public class GrabController : MonoBehaviour
         intensiteBase = lumiereLanterne.pointLightOuterRadius;
     }
 
+
     void Update()
     {
         if (Time.timeScale == 0f) return;
@@ -64,7 +66,7 @@ public class GrabController : MonoBehaviour
         {
             return;
         }
-        if (!canGrab) return; // Sortir si le joueur ne peut pas saisir
+
 
         // Si un objet est tenu
         if (isHolding)
@@ -91,6 +93,18 @@ public class GrabController : MonoBehaviour
             heldItem.transform.position = itemHolder.position;
         }
 
+
+        // Saisir ou lancer l'objet avec la touche E ou la mannette X ou Y
+        if (Input.GetButtonDown("Grab"))
+        {
+            GrabAction();
+        }
+
+    }
+
+    public void GrabAction() //appelable par le bouton mobile
+    {
+        if (!canGrab) return; // Sortir si le joueur ne peut pas saisir
         // D�tection des objets attrapables autour du joueur
         Collider2D[] hits = Physics2D.OverlapCircleAll(grabDetect.position, rayDist);
 
@@ -99,21 +113,19 @@ public class GrabController : MonoBehaviour
             // V�rifier si un objet est soit un "Item" soit une "Lanterne"
             if (hit.CompareTag("Item") || hit.CompareTag("Lanterne"))
             {
-                // Saisir ou lancer l'objet avec la touche E ou la mannette X ou Y
-                if (Input.GetButtonDown("Grab"))
+
+                if (!isHolding)
                 {
-                    if (!isHolding)
+                    GrabItem(hit.gameObject); // Attraper l'objet
+                }
+                else if (heldItem != null)
+                {
+                    if (!IsThrowBlocked())
                     {
-                        GrabItem(hit.gameObject); // Attraper l'objet
-                    }
-                    else if (heldItem != null)
-                    {
-                        if (!IsThrowBlocked())
-                        {
-                            ThrowItem();
-                        }
+                        ThrowItem();
                     }
                 }
+
             }
         }
     }
