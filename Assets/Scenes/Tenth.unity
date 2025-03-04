@@ -2166,9 +2166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8185518129469670285}
-  minX: -1
+  minX: -10
   maxX: 200
-  minY: -5
+  minY: -10
   maxY: 100
 --- !u!114 &519420034
 MonoBehaviour:
@@ -2340,6 +2340,10 @@ PrefabInstance:
       propertyPath: grabController
       value: 
       objectReference: {fileID: 8185518129469670291}
+    - target: {fileID: 2320009617934910057, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: lightRadiusTarget
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 58.01
@@ -6485,6 +6489,10 @@ PrefabInstance:
       propertyPath: grabController
       value: 
       objectReference: {fileID: 8185518129469670291}
+    - target: {fileID: 2320009617934910057, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
+      propertyPath: lightRadiusTarget
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4315130067860916283, guid: 8bbfbe79485da64428faccdbe31269b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.52245
